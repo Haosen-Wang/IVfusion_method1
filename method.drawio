@@ -271,10 +271,10 @@
         <mxCell id="-YEli1nWcmMKRqae06TI-130" value="$$If$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1380" y="1140" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="-YEli1nWcmMKRqae06TI-131" value="噪声感知门控" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="-YEli1nWcmMKRqae06TI-131" value="局部信息感知门控" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="685" y="945" width="80" height="117.5" as="geometry" />
         </mxCell>
-        <mxCell id="-YEli1nWcmMKRqae06TI-132" value="噪声感知门控" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="-YEli1nWcmMKRqae06TI-132" value="全局信息感知感知门控" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="685" y="1302.5" width="80" height="117.5" as="geometry" />
         </mxCell>
         <mxCell id="-YEli1nWcmMKRqae06TI-133" value="变分推理编码器" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
