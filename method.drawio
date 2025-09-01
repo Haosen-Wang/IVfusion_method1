@@ -248,19 +248,19 @@
           <mxGeometry x="780" y="1230" width="30" height="320" as="geometry" />
         </mxCell>
         <mxCell id="-YEli1nWcmMKRqae06TI-123" value="L" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="985" y="967.5" width="130" height="45" as="geometry" />
+          <mxGeometry x="985" y="1050" width="130" height="45" as="geometry" />
         </mxCell>
         <mxCell id="-YEli1nWcmMKRqae06TI-124" value="$$Id_v$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="990" y="1040" width="120" height="60" as="geometry" />
+          <mxGeometry x="990" y="1110" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="-YEli1nWcmMKRqae06TI-125" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1190" y="1180" width="110" height="130" as="geometry" />
         </mxCell>
         <mxCell id="-YEli1nWcmMKRqae06TI-126" value="G" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="990" y="1287.5" width="130" height="45" as="geometry" />
+          <mxGeometry x="985" y="1202.5" width="130" height="45" as="geometry" />
         </mxCell>
         <mxCell id="-YEli1nWcmMKRqae06TI-127" value="$$Id_i$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="995" y="1360" width="120" height="60" as="geometry" />
+          <mxGeometry x="995" y="1275" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="-YEli1nWcmMKRqae06TI-128" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1190" y="1050" width="110" height="130" as="geometry" />
@@ -284,10 +284,10 @@
           <mxGeometry x="30" y="1320" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="-YEli1nWcmMKRqae06TI-135" value="融合感知的全局信息多专家协作解码器" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="670" y="1210" width="220" height="30" as="geometry" />
+          <mxGeometry x="640" y="860" width="220" height="30" as="geometry" />
         </mxCell>
         <mxCell id="-YEli1nWcmMKRqae06TI-136" value="融合感知的局部信息多专家协作解码器" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="650" y="860" width="220" height="30" as="geometry" />
+          <mxGeometry x="630" y="1210" width="220" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
