@@ -109,9 +109,6 @@
         <mxCell id="-YEli1nWcmMKRqae06TI-68" value="" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;" vertex="1" parent="1">
           <mxGeometry x="350" y="465" width="70" height="45" as="geometry" />
         </mxCell>
-        <mxCell id="-YEli1nWcmMKRqae06TI-69" value="" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;" vertex="1" parent="1">
-          <mxGeometry x="690" y="472.5" width="70" height="45" as="geometry" />
-        </mxCell>
         <mxCell id="-YEli1nWcmMKRqae06TI-70" value="多专家Decoder" style="rounded=0;whiteSpace=wrap;html=1;textDirection=vertical-lr;" vertex="1" parent="1">
           <mxGeometry x="780" y="380" width="30" height="320" as="geometry" />
         </mxCell>
@@ -141,6 +138,9 @@
         </mxCell>
         <mxCell id="-YEli1nWcmMKRqae06TI-80" value="退化感知门控" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="685" y="95" width="80" height="117.5" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-81" value="退化感知门控" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="685" y="452.5" width="80" height="117.5" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
