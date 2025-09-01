@@ -1,23 +1,32 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36" version="28.0.9">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36" version="28.1.1">
   <diagram name="第 1 页" id="RGmQroDqB4q25eG4RAZ-">
-    <mxGraphModel dx="1188" dy="619" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="815" dy="425" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="z1M0OQx9W_4h6v7R4tWv-1" value="Ir" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="130" y="90" width="120" height="60" as="geometry" />
+        <mxCell id="-YEli1nWcmMKRqae06TI-6" value="Id_v" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="90" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="z1M0OQx9W_4h6v7R4tWv-2" value="Vis" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="130" y="200" width="120" height="60" as="geometry" />
+        <mxCell id="-YEli1nWcmMKRqae06TI-7" value="Id_i" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="240" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="z1M0OQx9W_4h6v7R4tWv-3" value="CLIP" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="290" y="90" width="270" height="170" as="geometry" />
+        <mxCell id="-YEli1nWcmMKRqae06TI-8" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" width="470" height="350" as="geometry" />
         </mxCell>
-        <mxCell id="apzaDOFgVWmtc9umwQRF-1" value="R_Ir" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="600" y="90" width="120" height="60" as="geometry" />
+        <mxCell id="-YEli1nWcmMKRqae06TI-9" value="专家感知自适应噪声识别" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" width="470" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="apzaDOFgVWmtc9umwQRF-2" value="R_Vis" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="600" y="200" width="120" height="60" as="geometry" />
+        <mxCell id="-YEli1nWcmMKRqae06TI-10" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="50" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-11" value="Encoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="50" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-12" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="205" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-13" value="Encoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="205" width="110" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
