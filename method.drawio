@@ -151,9 +151,6 @@
         <mxCell id="-YEli1nWcmMKRqae06TI-89" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="210" y="850" width="1140" height="730" as="geometry" />
         </mxCell>
-        <mxCell id="-YEli1nWcmMKRqae06TI-90" value="融合感知的多专家协作解码器" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="660" y="860" width="200" height="30" as="geometry" />
-        </mxCell>
         <mxCell id="-YEli1nWcmMKRqae06TI-91" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="230" y="940" width="110" height="130" as="geometry" />
         </mxCell>
@@ -285,6 +282,12 @@
         </mxCell>
         <mxCell id="-YEli1nWcmMKRqae06TI-134" value="$$Ic_I$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="30" y="1320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-135" value="融合感知的全局信息多专家协作解码器" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="670" y="1210" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-136" value="融合感知的局部信息多专家协作解码器" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="860" width="220" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
