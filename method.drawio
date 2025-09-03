@@ -1,23 +1,293 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36" version="28.0.9">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36" version="28.1.1">
   <diagram name="第 1 页" id="RGmQroDqB4q25eG4RAZ-">
-    <mxGraphModel dx="1188" dy="619" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1678" dy="2043" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="z1M0OQx9W_4h6v7R4tWv-1" value="Ir" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="130" y="90" width="120" height="60" as="geometry" />
+        <mxCell id="-YEli1nWcmMKRqae06TI-6" value="$$Id_V$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="145" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="z1M0OQx9W_4h6v7R4tWv-2" value="Vis" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="130" y="200" width="120" height="60" as="geometry" />
+        <mxCell id="-YEli1nWcmMKRqae06TI-7" value="$$Id_I$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="457.5" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="z1M0OQx9W_4h6v7R4tWv-3" value="CLIP" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="290" y="90" width="270" height="170" as="geometry" />
+        <mxCell id="-YEli1nWcmMKRqae06TI-8" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" width="1090" height="730" as="geometry" />
         </mxCell>
-        <mxCell id="apzaDOFgVWmtc9umwQRF-1" value="R_Ir" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="600" y="90" width="120" height="60" as="geometry" />
+        <mxCell id="-YEli1nWcmMKRqae06TI-9" value="退化感知的多专家协作解码器" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="695" y="10" width="200" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="apzaDOFgVWmtc9umwQRF-2" value="R_Vis" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="600" y="200" width="120" height="60" as="geometry" />
+        <mxCell id="-YEli1nWcmMKRqae06TI-10" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="90" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-11" value="Encoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="90" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-29" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="50" width="240" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-14" value="Z" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="95" width="80" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-15" value="$$\mu$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="80" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-16" value="$$\sigma$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="140" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-18" value="N(0,I)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="220" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-37" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="40" width="180" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-23" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="50" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-24" value="Decoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="50" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-25" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="200" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-26" value="Decoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="200" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-27" value="$$\theta$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="220" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-30" value="隐变量Z" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="50" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-32" value="" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="125" width="70" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-38" value="多专家Decoder" style="rounded=0;whiteSpace=wrap;html=1;textDirection=vertical-lr;" vertex="1" parent="1">
+          <mxGeometry x="780" y="40" width="30" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-54" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="430" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-55" value="Encoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="430" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-56" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="390" width="240" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-57" value="Z" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="435" width="100" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-58" value="$$\mu$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="420" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-59" value="$$\sigma$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="480" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-60" value="N(0,I)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="560" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-61" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="380" width="180" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-62" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="390" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-63" value="Decoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="390" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-64" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="540" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-65" value="Decoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="540" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-66" value="$$\theta$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="560" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-67" value="隐变量Z" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="390" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-68" value="" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="465" width="70" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-70" value="多专家Decoder" style="rounded=0;whiteSpace=wrap;html=1;textDirection=vertical-lr;" vertex="1" parent="1">
+          <mxGeometry x="780" y="380" width="30" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-71" value="N" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="985" y="117.5" width="130" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-72" value="$$Id_v$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="990" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-73" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="110" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-75" value="N" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="990" y="437.5" width="130" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-76" value="$$Id_i$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="995" y="510" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-77" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1165" y="430" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-78" value="$$Ic_V$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="145" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-79" value="$$Ic_I$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="457.5" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-80" value="噪声感知门控" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="685" y="95" width="80" height="117.5" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-81" value="噪声感知门控" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="685" y="452.5" width="80" height="117.5" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-85" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;基于变分推理的任务感知门控多专家解码器 for&amp;nbsp;&lt;span style=&quot;font-family: NimbusRomNo9L-Medi; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Degraded Multi-Modal Image Fusion&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry y="-100" width="1520" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-86" value="变分推理编码器" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="214" y="10" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-89" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="850" width="1140" height="730" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-91" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="940" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-92" value="Encoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="940" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-93" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="900" width="240" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-94" value="Z" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="945" width="80" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-95" value="$$\mu$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="930" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-96" value="$$\sigma$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="990" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-97" value="N(0,I)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="1070" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-98" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="890" width="180" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-99" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="900" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-100" value="Decoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="900" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-101" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="1050" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-102" value="Decoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="1050" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-103" value="$$\theta$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="1070" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-104" value="隐变量Z" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="900" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-105" value="" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="975" width="70" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-106" value="多专家Decoder" style="rounded=0;whiteSpace=wrap;html=1;textDirection=vertical-lr;" vertex="1" parent="1">
+          <mxGeometry x="780" y="890" width="30" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-107" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="1280" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-108" value="Encoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="1280" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-109" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="1240" width="240" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-110" value="Z" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="1285" width="100" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-111" value="$$\mu$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="1270" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-112" value="$$\sigma$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="1330" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-113" value="N(0,I)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="565" y="1410" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-114" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="1230" width="180" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-115" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="1240" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-116" value="Decoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="1240" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-117" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="1390" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-118" value="Decoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="827" y="1390" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-119" value="$$\theta$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="1410" width="65" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-120" value="隐变量Z" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="1240" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-121" value="" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="1315" width="70" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-122" value="多专家Decoder" style="rounded=0;whiteSpace=wrap;html=1;textDirection=vertical-lr;" vertex="1" parent="1">
+          <mxGeometry x="780" y="1230" width="30" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-123" value="L" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="985" y="1050" width="130" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-124" value="$$Id_v$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="990" y="1110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-125" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="1180" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-126" value="G" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="985" y="1202.5" width="130" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-127" value="$$Id_i$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="995" y="1275" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-128" value="Transformer&lt;br&gt;Block" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="1050" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-129" value="$$Ic_V$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="980" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-130" value="$$If$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="1140" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-131" value="局部信息感知门控" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="685" y="945" width="80" height="117.5" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-132" value="全局信息感知感知门控" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="685" y="1302.5" width="80" height="117.5" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-133" value="变分推理编码器" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="214" y="860" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-134" value="$$Ic_I$$" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="1320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-135" value="融合感知的全局信息多专家协作解码器" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="860" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-YEli1nWcmMKRqae06TI-136" value="融合感知的局部信息多专家协作解码器" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="630" y="1210" width="220" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
