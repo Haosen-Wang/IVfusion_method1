@@ -1,0 +1,20 @@
+Epoch 1/10:   6%|███▎                                                     | 53/904 [01:02<16:44,  1.18s/it, Loss=0.0402]
+Traceback (most recent call last):
+  File "/home/user/1024_whs/IVfusion_method1/model/stage2/train.py", line 365, in <module>
+    main(**config_dic)
+  File "/home/user/1024_whs/IVfusion_method1/model/stage2/train.py", line 328, in main
+    best_epoch, best_loss = train_model(
+                            ^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage2/train.py", line 101, in train_model
+    epoch_loss = train_epoch_model(model, train_loader, criterion, optimizer, device_1, device_2, device_3, val_loader, pbar)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage2/train.py", line 51, in train_epoch_model
+    loss.backward()
+  File "/opt/conda/lib/python3.11/site-packages/torch/_tensor.py", line 648, in backward
+    torch.autograd.backward(
+  File "/opt/conda/lib/python3.11/site-packages/torch/autograd/__init__.py", line 353, in backward
+    _engine_run_backward(
+  File "/opt/conda/lib/python3.11/site-packages/torch/autograd/graph.py", line 824, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

@@ -1,0 +1,1 @@
+{"ssim_loss":1,"perceptual_loss":0,"_step":110,"pixel_loss":0,"rec_i":0,"total_loss_vi":0,"rec_g":0,"_wandb":{"runtime":238},"kl_loss_g":0,"kl_loss_i":0,"total_loss_f":1,"_timestamp":1.7569037410375986e+09,"total_loss":1,"gradient_loss":0,"_runtime":238}

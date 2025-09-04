@@ -1,0 +1,1 @@
+{"total_loss_vi":0.7384414076805115,"pixel_loss":0.6426353454589844,"_wandb":{"runtime":10},"_timestamp":1.7569718371145413e+09,"gradient_loss":0.7061909437179565,"kl_loss_n":5.383334159851074,"total_loss":3.3524105548858643,"_step":4,"_runtime":10,"total_loss_f":2.613969087600708,"rec_n":1.4230494499206543,"perceptual_loss":0.9121224880218506}

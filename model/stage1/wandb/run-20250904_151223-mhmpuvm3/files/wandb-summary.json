@@ -1,0 +1,1 @@
+{"epoch":2,"total_loss_f":3.6568069458007812,"_step":40,"_wandb":{"runtime":76},"gradient_loss":0.7376605272293091,"rec_n":2.165419816970825,"_timestamp":1.7569700189540982e+09,"_runtime":76,"pixel_loss":1.083000898361206,"perceptual_loss":0.898749828338623,"kl_loss_n":3.695171594619751,"train_loss":0,"total_loss_vi":1.1011857986450195,"total_loss":4.757992744445801}

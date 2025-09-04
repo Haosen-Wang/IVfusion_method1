@@ -1,0 +1,33 @@
+Epoch 1/2:  30%|█████████████████████▎                                                 | 90/300 [01:41<03:55,  1.12s/it]
+当前学习率: 0.001000
+Traceback (most recent call last):
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 660, in <module>
+    "compress_checkpoints": getattr(args, 'compress_checkpoints', True),
+    ^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 547, in main
+    remaining_epochs = max(0, num_epochs - start_epoch)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 242, in train_model
+    epoch_loss = train_epoch_model(model, train_loader, criterion, optimizer, device_1, device_2, val_loader, pbar)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 176, in train_epoch_model
+    optimizer.step()
+  File "/opt/conda/lib/python3.11/site-packages/torch/optim/lr_scheduler.py", line 124, in wrapper
+    return func.__get__(opt, opt.__class__)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/optim/optimizer.py", line 485, in wrapper
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/optim/optimizer.py", line 79, in _use_grad
+    ret = func(self, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/optim/adam.py", line 246, in step
+    adam(
+  File "/opt/conda/lib/python3.11/site-packages/torch/optim/optimizer.py", line 147, in maybe_fallback
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/optim/adam.py", line 933, in adam
+    func(
+  File "/opt/conda/lib/python3.11/site-packages/torch/optim/adam.py", line 675, in _multi_tensor_adam
+    torch._foreach_mul_(device_exp_avg_sqs, beta2)
+KeyboardInterrupt

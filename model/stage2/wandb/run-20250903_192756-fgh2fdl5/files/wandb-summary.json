@@ -1,0 +1,1 @@
+{"_wandb":{"runtime":316},"total_loss":NaN,"pixel_loss":NaN,"total_loss_f":NaN,"ssim_loss":NaN,"perceptual_loss":NaN,"rec_g":7.999963067479686,"batch_idx":261,"total_loss_vi":7.999963067479686,"kl_loss_i":NaN,"_step":26,"_runtime":316,"rec_i":7.999963067479686,"_timestamp":1.7568991895793417e+09,"gradient_loss":NaN,"kl_loss_g":NaN}

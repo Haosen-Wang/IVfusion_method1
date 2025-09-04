@@ -1,0 +1,38 @@
+Epoch 1/10:   0%|                                                                               | 0/904 [00:02<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/user/1024_whs/IVfusion_method1/model/stage2/train.py", line 363, in <module>
+    main(**config_dic)
+  File "/home/user/1024_whs/IVfusion_method1/model/stage2/train.py", line 326, in main
+    best_epoch, best_loss = train_model(
+                            ^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage2/train.py", line 99, in train_model
+    epoch_loss = train_epoch_model(model, train_loader, criterion, optimizer, device_1, device_2, device_3, val_loader, pbar)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage2/train.py", line 45, in train_epoch_model
+    loss_all= criterion(output, i_image, v_image, l, g, mu_l, sigma2_l, mu_g, sigma2_g)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage2/loss.py", line 187, in forward
+    fusion_losses = self.fusion_loss(f, v, i)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage2/loss.py", line 95, in forward
+    pixel_loss = self.pixel_loss(fused, visible, infrared)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage2/loss.py", line 24, in pixel_loss
+    return F.l1_loss(fused, visible) + F.l1_loss(fused, infrared)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/functional.py", line 3830, in l1_loss
+    return torch._C._nn.l1_loss(
+           ^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:2 and cpu!

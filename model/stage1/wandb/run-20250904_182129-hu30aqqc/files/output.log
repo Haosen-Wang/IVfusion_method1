@@ -1,0 +1,16 @@
+Epoch 1/5: 100%|████████████████████████████████████████████████████████████████████| 1350/1350 [34:28<00:00,  1.53s/it]
+当前学习率: 0.001000
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/checkpoint_epoch_1.pth (56.4MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/best_model.pth (56.4MB)
+✓ 新的最佳模型已保存！ (Epoch 1)
+Epoch [1/5],Train Loss: 4.5898 🏆
+Epoch 2/5: 100%|████████████████████████████████████████████████████████████████████| 1350/1350 [34:23<00:00,  1.53s/it]
+当前学习率: 0.000905
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/checkpoint_epoch_2.pth (56.4MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/best_model.pth (56.4MB)
+✓ 新的最佳模型已保存！ (Epoch 2)
+Epoch [2/5],Train Loss: 4.2514 🏆
+Epoch 3/5:  53%|████████████████████████████████████▋                                | 717/1350 [18:18<16:51,  1.60s/it]
+当前学习率: 0.000655

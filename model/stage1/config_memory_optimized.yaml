@@ -1,0 +1,69 @@
+# 内存优化配置文件 - 适用于大模型训练
+data:
+  d_data_dir: "/data/1024whs_data/DeMMI-RF/Train/degrad/Stripe/DroneRGBT"
+  c_data_dir: "/data/1024whs_data/DeMMI-RF/Train/infrared/Stripe/DroneRGBT"
+  mode: "L"
+
+training:
+  project_name: "Train_Memory_Optimized"
+  batch_size: 1  # 最小批次大小以节省显存
+  num_epochs: 10
+  resume_from_checkpoint: true
+
+device:
+  device_1: "cuda:0"
+  device_2: "cuda:1"
+  device_3: "cuda:2"
+
+model:
+  i_block_num: 2
+  v_block_num: 2
+  i_expert_num: 3
+  v_expert_num: 3
+  i_topk_expert: 2
+  v_topk_expert: 2
+  i_alpha: 1.0
+  v_alpha: 1.0
+  f_block_num: 3
+
+# 🚀 内存优化配置 - 减少显存占用的关键设置
+memory:
+  # 检查点加载优化
+  checkpoint_memory_efficient: true  # 启用内存高效的检查点加载
+  load_optimizer_state: false  # 💡 设为false可大幅减少显存占用
+  
+  # 检查点保存优化  
+  compress_checkpoints: true  # 压缩保存，减少文件大小
+  save_optimizer_in_epoch_checkpoints: false  # epoch检查点不保存优化器状态
+  
+# 实验配置 - 不同内存需求的实验设置
+experiments:
+  # 极低内存模式 - 适用于显存不足的情况
+  ultra_low_memory:
+    training:
+      batch_size: 1
+    memory:
+      checkpoint_memory_efficient: true
+      load_optimizer_state: false  # 不加载优化器状态
+      compress_checkpoints: true
+      save_optimizer_in_epoch_checkpoints: false
+  
+  # 平衡模式 - 在性能和内存间平衡
+  balanced:
+    training:
+      batch_size: 2
+    memory:
+      checkpoint_memory_efficient: true
+      load_optimizer_state: true  # 加载优化器状态保证训练连续性
+      compress_checkpoints: true
+      save_optimizer_in_epoch_checkpoints: false
+  
+  # 性能优先模式 - 适用于显存充足的情况
+  performance:
+    training:
+      batch_size: 4
+    memory:
+      checkpoint_memory_efficient: false  # 使用标准加载方式
+      load_optimizer_state: true
+      compress_checkpoints: false
+      save_optimizer_in_epoch_checkpoints: true

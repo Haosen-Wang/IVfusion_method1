@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../../../../data/1024whs_data/DeMMI-RF"
+		},
+		{
+			"path": "../MMGMLG"
 		}
 	],
 	"settings": {}

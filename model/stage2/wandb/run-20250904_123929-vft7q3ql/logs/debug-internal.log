@@ -1,0 +1,11 @@
+{"time":"2025-09-04T12:39:30.020854124+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-04T12:39:30.817181113+08:00","level":"INFO","msg":"stream: created new stream","id":"vft7q3ql"}
+{"time":"2025-09-04T12:39:30.817514013+08:00","level":"INFO","msg":"stream: started","id":"vft7q3ql"}
+{"time":"2025-09-04T12:39:30.817985539+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"vft7q3ql"}
+{"time":"2025-09-04T12:39:30.81747725+08:00","level":"INFO","msg":"handler: started","stream_id":"vft7q3ql"}
+{"time":"2025-09-04T12:39:30.817375457+08:00","level":"INFO","msg":"sender: started","stream_id":"vft7q3ql"}
+{"time":"2025-09-04T12:55:31.743560488+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": context deadline exceeded"}
+{"time":"2025-09-04T17:02:56.023785332+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-04T17:28:12.053977655+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-04T18:03:07.064371212+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-04T19:08:37.165139915+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}

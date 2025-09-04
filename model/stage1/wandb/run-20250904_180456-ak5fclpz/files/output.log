@@ -1,0 +1,20 @@
+Epoch 1/2: 100%|██████████████████████████████████████████████████████████████████████| 300/300 [05:16<00:00,  1.05s/it]
+当前学习率: 0.001000
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_infrared/latest_checkpoint.pth (168.9MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_infrared/checkpoint_epoch_1.pth (56.4MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_infrared/best_model.pth (56.4MB)
+✓ 新的最佳模型已保存！ (Epoch 1)
+Epoch [1/2],Train Loss: 1.4638 🏆
+Epoch 2/2: 100%|██████████████████████████████████████████████████████████████████████| 300/300 [05:12<00:00,  1.04s/it]
+当前学习率: 0.000500
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_infrared/latest_checkpoint.pth (168.9MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_infrared/checkpoint_epoch_2.pth (56.4MB)
+Epoch [2/2],Train Loss: 1.5102
+
+训练完成！最佳模型来自 Epoch 1
+检查点保存路径: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_infrared
+
+🎉 训练完成！
+📊 最佳模型: Epoch 1, Loss: 1.4638
+💾 模型检查点保存在: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_infrared
+✓ 最佳模型路径: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_infrared/best_model.pth

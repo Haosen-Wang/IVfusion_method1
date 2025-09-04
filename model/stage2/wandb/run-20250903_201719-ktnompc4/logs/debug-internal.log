@@ -1,0 +1,13 @@
+{"time":"2025-09-03T20:17:19.947219114+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-03T20:17:20.791659817+08:00","level":"INFO","msg":"stream: created new stream","id":"ktnompc4"}
+{"time":"2025-09-03T20:17:20.791729674+08:00","level":"INFO","msg":"stream: started","id":"ktnompc4"}
+{"time":"2025-09-03T20:17:20.791864817+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"ktnompc4"}
+{"time":"2025-09-03T20:17:20.79193672+08:00","level":"INFO","msg":"sender: started","stream_id":"ktnompc4"}
+{"time":"2025-09-03T20:17:20.792060742+08:00","level":"INFO","msg":"handler: started","stream_id":"ktnompc4"}
+{"time":"2025-09-03T20:19:26.883204597+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneRGBT/ktnompc4/file_stream\": EOF"}
+{"time":"2025-09-03T20:19:35.292443401+08:00","level":"INFO","msg":"stream: closing","id":"ktnompc4"}
+{"time":"2025-09-03T20:19:36.083137668+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-03T20:19:37.81841546+08:00","level":"INFO","msg":"handler: closed","stream_id":"ktnompc4"}
+{"time":"2025-09-03T20:19:37.818530705+08:00","level":"INFO","msg":"sender: closed","stream_id":"ktnompc4"}
+{"time":"2025-09-03T20:19:37.818527521+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"ktnompc4"}
+{"time":"2025-09-03T20:19:37.818729303+08:00","level":"INFO","msg":"stream: closed","id":"ktnompc4"}

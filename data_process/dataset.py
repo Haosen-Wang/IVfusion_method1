@@ -54,7 +54,6 @@ class ImageDataset(Dataset):
     def get_all_paths(self):
         """返回所有图像路径的列表"""
         return self.image_paths
-    
 if __name__=="__main__":
     v_data_dir="/data/1024whs_data/DeMMI-RF/Train/visible/noise15/M3FD"
     transform = transforms.Compose([

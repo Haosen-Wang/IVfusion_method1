@@ -1,0 +1,31 @@
+data:
+  d_data_dir: "/data/1024whs_data/DeMMI-RF/Train/degrad/haze/DroneRGBT"
+  c_data_dir: "/data/1024whs_data/DeMMI-RF/Train/infrared/haze/DroneRGBT"
+  mode: "RGB"
+
+training:
+  project_name: "Train_Degradclean_DroneRGBT_visible"
+  batch_size: 2  # 小批次避免内存问题
+  num_epochs: 5  # 快速测试
+  resume_from_checkpoint: True
+
+device:
+  device_1: "cuda:0"
+  device_2: "cuda:1"
+
+model:
+  i_block_num: 2
+  v_block_num: 2
+  i_expert_num: 4
+  v_expert_num: 4
+  i_topk_expert: 2
+  v_topk_expert: 2
+  i_alpha: 1.0
+  v_alpha: 1.0
+  f_block_num: 2
+  
+memory:
+  checkpoint_memory_efficient: true  # 启用内存高效的检查点加载
+  load_optimizer_state: false  # 是否加载优化器状态（设为false可节省显存）
+  compress_checkpoints: true  # 压缩保存检查点文件
+  save_optimizer_in_epoch_checkpoints: false  # epoch检查点是否保存优化器状态

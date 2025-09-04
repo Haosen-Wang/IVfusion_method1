@@ -1,0 +1,46 @@
+Epoch 1/5: 100%|██████████████████████████████████████████████████████████████████████| 150/150 [03:41<00:00,  1.48s/it]
+当前学习率: 0.001000
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_visible/checkpoint_epoch_1.pth (56.4MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_visible/best_model.pth (56.4MB)
+✓ 新的最佳模型已保存！ (Epoch 1)
+Epoch [1/5],Train Loss: 4.3940 🏆
+Epoch 2/5:   8%|█████▋                                                                 | 12/150 [00:17<03:23,  1.47s/it]
+当前学习率: 0.000905
+Traceback (most recent call last):
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 659, in <module>
+    main(**config_dic)
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 546, in main
+    best_epoch, best_loss = train_model(
+                            ^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 243, in train_model
+    epoch_loss = train_epoch_model(model, train_loader, criterion, optimizer, device_1, device_2, val_loader, pbar)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 147, in train_epoch_model
+    Ic_image, n, mu_n, sigma2_n =model(d_image,device_1, device_2)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/model.py", line 37, in forward
+    self.noise_encoder_decoder=self.noise_encoder_decoder.to(device_1)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1355, in to
+    return self._apply(convert)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 941, in _apply
+    with torch.no_grad():
+  File "/opt/conda/lib/python3.11/site-packages/torch/autograd/grad_mode.py", line 85, in __exit__
+    torch.set_grad_enabled(self.prev)
+  File "/opt/conda/lib/python3.11/site-packages/torch/autograd/grad_mode.py", line 187, in __init__
+    torch._C._set_grad_enabled(mode)
+KeyboardInterrupt

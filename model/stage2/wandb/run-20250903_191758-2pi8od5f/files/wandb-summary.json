@@ -1,0 +1,1 @@
+{"_step":13,"total_loss_f":NaN,"kl_loss_g":NaN,"total_loss":NaN,"ssim_loss":NaN,"batch_idx":131,"_wandb":{"runtime":174},"gradient_loss":NaN,"perceptual_loss":NaN,"total_loss_vi":NaN,"_runtime":174,"pixel_loss":NaN,"rec_i":7.999963067479685,"_timestamp":1.7568984424475098e+09,"kl_loss_i":NaN,"rec_g":17.324538904961035}

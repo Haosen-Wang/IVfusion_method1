@@ -1,0 +1,22 @@
+{"time":"2025-09-03T21:21:30.593312082+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-03T21:21:31.482434171+08:00","level":"INFO","msg":"stream: created new stream","id":"v479r2ga"}
+{"time":"2025-09-03T21:21:31.482634474+08:00","level":"INFO","msg":"stream: started","id":"v479r2ga"}
+{"time":"2025-09-03T21:21:31.482733591+08:00","level":"INFO","msg":"handler: started","stream_id":"v479r2ga"}
+{"time":"2025-09-03T21:21:31.482769245+08:00","level":"INFO","msg":"sender: started","stream_id":"v479r2ga"}
+{"time":"2025-09-03T21:21:31.482889858+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"v479r2ga"}
+{"time":"2025-09-03T21:50:54.747889999+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneRGBT/v479r2ga/file_stream\": EOF"}
+{"time":"2025-09-03T21:57:36.624883943+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneRGBT/v479r2ga/file_stream\": EOF"}
+{"time":"2025-09-03T22:00:39.705986877+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneRGBT/v479r2ga/file_stream\": EOF"}
+{"time":"2025-09-03T22:47:05.550189539+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneRGBT/v479r2ga/file_stream\": unexpected EOF"}
+{"time":"2025-09-03T22:55:36.481378301+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneRGBT/v479r2ga/file_stream\": EOF"}
+{"time":"2025-09-03T23:16:09.574042689+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneRGBT/v479r2ga/file_stream\": EOF"}
+{"time":"2025-09-03T23:22:29.372420558+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneRGBT/v479r2ga/file_stream\": unexpected EOF"}
+{"time":"2025-09-03T23:35:03.358386905+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneRGBT/v479r2ga/file_stream\": EOF"}
+{"time":"2025-09-03T23:38:14.903473736+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneRGBT/v479r2ga/file_stream\": EOF"}
+{"time":"2025-09-03T23:40:54.640484152+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneRGBT/v479r2ga/file_stream\": unexpected EOF"}
+{"time":"2025-09-04T00:41:01.666300326+08:00","level":"INFO","msg":"stream: closing","id":"v479r2ga"}
+{"time":"2025-09-04T00:41:03.314274939+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-04T00:41:04.211100498+08:00","level":"INFO","msg":"handler: closed","stream_id":"v479r2ga"}
+{"time":"2025-09-04T00:41:04.2111918+08:00","level":"INFO","msg":"sender: closed","stream_id":"v479r2ga"}
+{"time":"2025-09-04T00:41:04.21118415+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"v479r2ga"}
+{"time":"2025-09-04T00:41:04.21137177+08:00","level":"INFO","msg":"stream: closed","id":"v479r2ga"}
