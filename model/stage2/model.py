@@ -32,7 +32,7 @@ class V_encoder_decoder(nn.Module):
         return g,mu,sigma2
 
 class IV_fusion_model(nn.Module):
-    def __init__(self,i_block_num=2,v_block_num=2,i_expert_num=3,v_expert_num=3,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=3):
+    def __init__(self,i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2):
         super(IV_fusion_model,self).__init__()
         self.I_encoder_decoder=I_encoder_decoder(block_num=i_block_num,expert_num=i_expert_num,topk_expert=i_topk_expert,alpha=i_alpha)
         self.V_encoder_decoder=V_encoder_decoder(block_num=v_block_num,expert_num=v_expert_num,topk_expert=v_topk_expert,alpha=v_alpha)

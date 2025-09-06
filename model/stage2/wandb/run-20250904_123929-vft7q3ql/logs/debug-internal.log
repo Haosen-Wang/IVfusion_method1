@@ -9,3 +9,35 @@
 {"time":"2025-09-04T17:28:12.053977655+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
 {"time":"2025-09-04T18:03:07.064371212+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
 {"time":"2025-09-04T19:08:37.165139915+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-04T20:05:12.088707579+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-04T22:00:28.151075068+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-04T22:13:38.440969391+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-04T22:18:42.062631072+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-04T22:24:38.819429815+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": unexpected EOF"}
+{"time":"2025-09-04T22:26:18.084140074+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": unexpected EOF"}
+{"time":"2025-09-04T22:57:52.074260753+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-04T23:19:52.041598111+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-04T23:26:20.417766191+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-04T23:26:26.308438215+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-04T23:29:38.598991488+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": unexpected EOF"}
+{"time":"2025-09-04T23:30:44.681306003+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": unexpected EOF"}
+{"time":"2025-09-04T23:33:11.346531851+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-05T00:15:36.554273369+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-05T00:26:55.501166755+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2025-09-05T00:28:18.077030196+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-05T00:39:31.548258772+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-05T00:41:20.473584726+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": unexpected EOF"}
+{"time":"2025-09-05T01:31:06.150120706+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-05T07:56:29.413307546+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-05T07:56:31.881686085+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-05T07:56:36.98617398+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-05T07:56:46.023161283+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-05T08:29:18.878288623+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-05T10:23:22.189645262+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-05T11:19:55.932391637+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/vft7q3ql/file_stream\": EOF"}
+{"time":"2025-09-05T14:08:23.327236633+08:00","level":"INFO","msg":"stream: closing","id":"vft7q3ql"}
+{"time":"2025-09-05T14:08:24.602327841+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-05T14:08:26.10284895+08:00","level":"INFO","msg":"handler: closed","stream_id":"vft7q3ql"}
+{"time":"2025-09-05T14:08:26.102967917+08:00","level":"INFO","msg":"sender: closed","stream_id":"vft7q3ql"}
+{"time":"2025-09-05T14:08:26.102952301+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"vft7q3ql"}
+{"time":"2025-09-05T14:08:26.103140871+08:00","level":"INFO","msg":"stream: closed","id":"vft7q3ql"}

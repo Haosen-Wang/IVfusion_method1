@@ -1,0 +1,13 @@
+{"time":"2025-09-06T18:51:43.173715173+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-06T18:51:44.032602888+08:00","level":"INFO","msg":"stream: created new stream","id":"s1gmzymw"}
+{"time":"2025-09-06T18:51:44.03271973+08:00","level":"INFO","msg":"stream: started","id":"s1gmzymw"}
+{"time":"2025-09-06T18:51:44.032744665+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"s1gmzymw"}
+{"time":"2025-09-06T18:51:44.032798191+08:00","level":"INFO","msg":"sender: started","stream_id":"s1gmzymw"}
+{"time":"2025-09-06T18:51:44.032798026+08:00","level":"INFO","msg":"handler: started","stream_id":"s1gmzymw"}
+{"time":"2025-09-06T19:19:20.213250626+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_M3FD_infrared/s1gmzymw/file_stream\": EOF"}
+{"time":"2025-09-06T20:04:09.011682598+08:00","level":"INFO","msg":"stream: closing","id":"s1gmzymw"}
+{"time":"2025-09-06T20:04:10.589604418+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-06T20:04:11.354007603+08:00","level":"INFO","msg":"handler: closed","stream_id":"s1gmzymw"}
+{"time":"2025-09-06T20:04:11.354091715+08:00","level":"INFO","msg":"sender: closed","stream_id":"s1gmzymw"}
+{"time":"2025-09-06T20:04:11.35407773+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"s1gmzymw"}
+{"time":"2025-09-06T20:04:11.354219888+08:00","level":"INFO","msg":"stream: closed","id":"s1gmzymw"}

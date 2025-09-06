@@ -1,0 +1,14 @@
+{"time":"2025-09-05T00:05:12.762750653+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-05T00:05:13.596353189+08:00","level":"INFO","msg":"stream: created new stream","id":"7mljxxmh"}
+{"time":"2025-09-05T00:05:13.596549842+08:00","level":"INFO","msg":"stream: started","id":"7mljxxmh"}
+{"time":"2025-09-05T00:05:13.596592615+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"7mljxxmh"}
+{"time":"2025-09-05T00:05:13.596635676+08:00","level":"INFO","msg":"sender: started","stream_id":"7mljxxmh"}
+{"time":"2025-09-05T00:05:13.596691005+08:00","level":"INFO","msg":"handler: started","stream_id":"7mljxxmh"}
+{"time":"2025-09-05T00:28:15.798988522+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/7mljxxmh/file_stream\": unexpected EOF"}
+{"time":"2025-09-05T02:27:50.900429535+08:00","level":"INFO","msg":"api: retrying HTTP error","status":502,"url":"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/7mljxxmh/file_stream","body":"\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>502 Server Error</title>\n</head>\n<body text=#000000 bgcolor=#ffffff>\n<h1>Error: Server Error</h1>\n<h2>The server encountered a temporary error and could not complete your request.<p>Please try again in 30 seconds.</h2>\n<h2></h2>\n</body></html>\n"}
+{"time":"2025-09-05T02:55:54.655877031+08:00","level":"INFO","msg":"stream: closing","id":"7mljxxmh"}
+{"time":"2025-09-05T02:55:57.948358374+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-05T02:55:58.721137932+08:00","level":"INFO","msg":"handler: closed","stream_id":"7mljxxmh"}
+{"time":"2025-09-05T02:55:58.721232871+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"7mljxxmh"}
+{"time":"2025-09-05T02:55:58.721253684+08:00","level":"INFO","msg":"sender: closed","stream_id":"7mljxxmh"}
+{"time":"2025-09-05T02:55:58.721406289+08:00","level":"INFO","msg":"stream: closed","id":"7mljxxmh"}

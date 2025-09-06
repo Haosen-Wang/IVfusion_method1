@@ -1,0 +1,15 @@
+Epoch 1/5:  86%|████████████████████████████████████████████████████████████▌         | 701/811 [16:59<02:40,  1.45s/it]
+当前学习率: 0.001000
+Traceback (most recent call last):
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 661, in <module>
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 548, in main
+    best_epoch, best_loss = train_model(
+                            ^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 243, in train_model
+    epoch_loss = train_epoch_model(model, train_loader, criterion, optimizer, device_1, device_2, val_loader, pbar)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 180, in train_epoch_model
+    torch.cuda.empty_cache()
+  File "/opt/conda/lib/python3.11/site-packages/torch/cuda/memory.py", line 222, in empty_cache
+    torch._C._cuda_emptyCache()
+KeyboardInterrupt

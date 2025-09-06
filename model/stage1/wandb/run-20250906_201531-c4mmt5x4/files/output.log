@@ -1,0 +1,12 @@
+Epoch 1/5: 100%|██████████████████████████████████████████████████████████████████████| 154/154 [03:45<00:00,  1.46s/it]
+当前学习率: 0.001000
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_visible/checkpoint_epoch_1.pth (56.4MB)
+Epoch [1/5],Train Loss: 4.4486
+Epoch 2/5: 100%|██████████████████████████████████████████████████████████████████████| 154/154 [03:42<00:00,  1.45s/it]
+当前学习率: 0.000905
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_visible/checkpoint_epoch_2.pth (56.4MB)
+Epoch [2/5],Train Loss: 4.2082
+Epoch 3/5:  38%|██████████████████████████▋                                            | 58/154 [01:24<02:16,  1.42s/it]
+当前学习率: 0.000655

@@ -1,0 +1,17 @@
+{"time":"2025-09-06T16:21:58.188007945+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-06T16:21:58.992576764+08:00","level":"INFO","msg":"stream: created new stream","id":"khuu1yeg"}
+{"time":"2025-09-06T16:21:58.992669336+08:00","level":"INFO","msg":"stream: started","id":"khuu1yeg"}
+{"time":"2025-09-06T16:21:58.992706009+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"khuu1yeg"}
+{"time":"2025-09-06T16:21:58.992749105+08:00","level":"INFO","msg":"handler: started","stream_id":"khuu1yeg"}
+{"time":"2025-09-06T16:21:58.992767829+08:00","level":"INFO","msg":"sender: started","stream_id":"khuu1yeg"}
+{"time":"2025-09-06T16:23:34.894670546+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/khuu1yeg/file_stream\": EOF"}
+{"time":"2025-09-06T16:25:19.888679568+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/khuu1yeg/file_stream\": EOF"}
+{"time":"2025-09-06T16:54:06.126346435+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/khuu1yeg/file_stream\": EOF"}
+{"time":"2025-09-06T16:57:36.301706733+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/khuu1yeg/file_stream\": EOF"}
+{"time":"2025-09-06T16:59:22.027031534+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/khuu1yeg/file_stream\": EOF"}
+{"time":"2025-09-06T18:04:15.368677884+08:00","level":"INFO","msg":"stream: closing","id":"khuu1yeg"}
+{"time":"2025-09-06T18:04:19.488931822+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-06T18:04:20.238835001+08:00","level":"INFO","msg":"handler: closed","stream_id":"khuu1yeg"}
+{"time":"2025-09-06T18:04:20.23892812+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"khuu1yeg"}
+{"time":"2025-09-06T18:04:20.238968745+08:00","level":"INFO","msg":"sender: closed","stream_id":"khuu1yeg"}
+{"time":"2025-09-06T18:04:20.239207646+08:00","level":"INFO","msg":"stream: closed","id":"khuu1yeg"}

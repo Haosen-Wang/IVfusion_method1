@@ -1,0 +1,25 @@
+{"time":"2025-09-04T21:13:49.134295102+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-04T21:13:50.154624673+08:00","level":"INFO","msg":"stream: created new stream","id":"6enbk4vv"}
+{"time":"2025-09-04T21:13:50.154692507+08:00","level":"INFO","msg":"stream: started","id":"6enbk4vv"}
+{"time":"2025-09-04T21:13:50.154739493+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"6enbk4vv"}
+{"time":"2025-09-04T21:13:50.154829824+08:00","level":"INFO","msg":"sender: started","stream_id":"6enbk4vv"}
+{"time":"2025-09-04T21:13:50.154738138+08:00","level":"INFO","msg":"handler: started","stream_id":"6enbk4vv"}
+{"time":"2025-09-04T21:19:40.565168819+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/6enbk4vv/file_stream\": EOF"}
+{"time":"2025-09-04T21:30:28.698654352+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/6enbk4vv/file_stream\": EOF"}
+{"time":"2025-09-04T22:01:13.462996031+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/6enbk4vv/file_stream\": EOF"}
+{"time":"2025-09-04T22:06:37.71570448+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/6enbk4vv/file_stream\": unexpected EOF"}
+{"time":"2025-09-04T22:18:32.333588666+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/6enbk4vv/file_stream\": EOF"}
+{"time":"2025-09-04T22:19:15.780596363+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/6enbk4vv/file_stream\": EOF"}
+{"time":"2025-09-04T22:44:14.662831006+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/6enbk4vv/file_stream\": unexpected EOF"}
+{"time":"2025-09-04T22:45:19.535750634+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/6enbk4vv/file_stream\": unexpected EOF"}
+{"time":"2025-09-04T22:49:03.008518117+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/6enbk4vv/file_stream\": EOF"}
+{"time":"2025-09-04T23:27:56.469700419+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/6enbk4vv/file_stream\": unexpected EOF"}
+{"time":"2025-09-04T23:51:21.898777669+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/6enbk4vv/file_stream\": EOF"}
+{"time":"2025-09-04T23:51:30.311128201+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/6enbk4vv/file_stream\": EOF"}
+{"time":"2025-09-04T23:56:17.762799681+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_visible/6enbk4vv/file_stream\": EOF"}
+{"time":"2025-09-05T00:04:57.762362757+08:00","level":"INFO","msg":"stream: closing","id":"6enbk4vv"}
+{"time":"2025-09-05T00:05:00.478192571+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-05T00:05:02.405196396+08:00","level":"INFO","msg":"handler: closed","stream_id":"6enbk4vv"}
+{"time":"2025-09-05T00:05:02.405278174+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"6enbk4vv"}
+{"time":"2025-09-05T00:05:02.405312492+08:00","level":"INFO","msg":"sender: closed","stream_id":"6enbk4vv"}
+{"time":"2025-09-05T00:05:02.405473253+08:00","level":"INFO","msg":"stream: closed","id":"6enbk4vv"}

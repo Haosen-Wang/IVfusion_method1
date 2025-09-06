@@ -1,0 +1,24 @@
+{"time":"2025-09-05T21:20:31.941865986+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-05T21:20:32.784335868+08:00","level":"INFO","msg":"stream: created new stream","id":"j0pz3n82"}
+{"time":"2025-09-05T21:20:32.784406141+08:00","level":"INFO","msg":"stream: started","id":"j0pz3n82"}
+{"time":"2025-09-05T21:20:32.784528679+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"j0pz3n82"}
+{"time":"2025-09-05T21:20:32.784560759+08:00","level":"INFO","msg":"handler: started","stream_id":"j0pz3n82"}
+{"time":"2025-09-05T21:20:32.784620883+08:00","level":"INFO","msg":"sender: started","stream_id":"j0pz3n82"}
+{"time":"2025-09-05T22:06:26.12348762+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/j0pz3n82/file_stream\": EOF"}
+{"time":"2025-09-05T22:28:49.122464168+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/j0pz3n82/file_stream\": EOF"}
+{"time":"2025-09-05T22:28:51.948583153+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/j0pz3n82/file_stream\": EOF"}
+{"time":"2025-09-05T22:28:57.097162494+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/j0pz3n82/file_stream\": EOF"}
+{"time":"2025-09-05T22:29:06.213748246+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/j0pz3n82/file_stream\": EOF"}
+{"time":"2025-09-05T22:50:42.598216071+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/j0pz3n82/file_stream\": EOF"}
+{"time":"2025-09-05T22:50:45.30093989+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/j0pz3n82/file_stream\": EOF"}
+{"time":"2025-09-05T22:50:50.423397043+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/j0pz3n82/file_stream\": EOF"}
+{"time":"2025-09-05T22:50:59.669023243+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/j0pz3n82/file_stream\": EOF"}
+{"time":"2025-09-05T23:17:20.782177467+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/j0pz3n82/file_stream\": EOF"}
+{"time":"2025-09-05T23:17:24.755483156+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/j0pz3n82/file_stream\": EOF"}
+{"time":"2025-09-05T23:17:30.42322116+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/j0pz3n82/file_stream\": EOF"}
+{"time":"2025-09-05T23:18:31.005637786+08:00","level":"INFO","msg":"stream: closing","id":"j0pz3n82"}
+{"time":"2025-09-05T23:18:32.819983396+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-05T23:18:35.288349362+08:00","level":"INFO","msg":"handler: closed","stream_id":"j0pz3n82"}
+{"time":"2025-09-05T23:18:35.288419718+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"j0pz3n82"}
+{"time":"2025-09-05T23:18:35.288461034+08:00","level":"INFO","msg":"sender: closed","stream_id":"j0pz3n82"}
+{"time":"2025-09-05T23:18:35.288618238+08:00","level":"INFO","msg":"stream: closed","id":"j0pz3n82"}

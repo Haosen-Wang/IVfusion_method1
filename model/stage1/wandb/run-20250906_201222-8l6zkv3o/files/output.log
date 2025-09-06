@@ -1,0 +1,87 @@
+Epoch 1/5:   2%|█▋                                                                      | 3/130 [00:03<02:43,  1.29s/it]
+当前学习率: 0.001000
+⚠️  批次 0 检测到 NaN/Inf 损失，跳过此批次...
+损失详情: {'total_loss_f': tensor(nan, device='cuda:1', grad_fn=<AddBackward0>), 'pixel_loss': tensor(nan, device='cuda:1', grad_fn=<MeanBackward0>), 'gradient_loss': tensor(nan, device='cuda:1', grad_fn=<MeanBackward0>), 'perceptual_loss': tensor(nan, device='cuda:1', grad_fn=<MeanBackward0>), 'total_loss_vi': tensor(nan, device='cuda:1', grad_fn=<MulBackward0>), 'rec_n': tensor(5.5452, device='cuda:1'), 'kl_loss_n': tensor(nan, device='cuda:1', grad_fn=<MulBackward0>), 'total_loss': tensor(nan, device='cuda:1', grad_fn=<AddBackward0>)}
+⚠️  批次 1 检测到 NaN/Inf 损失，跳过此批次...
+损失详情: {'total_loss_f': tensor(nan, device='cuda:1', grad_fn=<AddBackward0>), 'pixel_loss': tensor(nan, device='cuda:1', grad_fn=<MeanBackward0>), 'gradient_loss': tensor(nan, device='cuda:1', grad_fn=<MeanBackward0>), 'perceptual_loss': tensor(nan, device='cuda:1', grad_fn=<MeanBackward0>), 'total_loss_vi': tensor(nan, device='cuda:1', grad_fn=<MulBackward0>), 'rec_n': tensor(5.5452, device='cuda:1'), 'kl_loss_n': tensor(nan, device='cuda:1', grad_fn=<MulBackward0>), 'total_loss': tensor(nan, device='cuda:1', grad_fn=<AddBackward0>)}
+⚠️  批次 2 检测到 NaN/Inf 损失，跳过此批次...
+损失详情: {'total_loss_f': tensor(nan, device='cuda:1', grad_fn=<AddBackward0>), 'pixel_loss': tensor(nan, device='cuda:1', grad_fn=<MeanBackward0>), 'gradient_loss': tensor(nan, device='cuda:1', grad_fn=<MeanBackward0>), 'perceptual_loss': tensor(nan, device='cuda:1', grad_fn=<MeanBackward0>), 'total_loss_vi': tensor(nan, device='cuda:1', grad_fn=<MulBackward0>), 'rec_n': tensor(5.5452, device='cuda:1'), 'kl_loss_n': tensor(nan, device='cuda:1', grad_fn=<MulBackward0>), 'total_loss': tensor(nan, device='cuda:1', grad_fn=<AddBackward0>)}
+Traceback (most recent call last):
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 667, in <module>
+    main(**config_dic)
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 553, in main
+    best_epoch, best_loss = train_model(
+                            ^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 248, in train_model
+    epoch_loss = train_epoch_model(model, train_loader, criterion, optimizer, device_1, device_2, val_loader, pbar)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py", line 147, in train_epoch_model
+    Ic_image, n, mu_n, sigma2_n =model(d_image,device_1, device_2)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/model.py", line 48, in forward
+    out= self.fusion_net(fused_input)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/component.py", line 116, in forward
+    x=self.model(x)
+      ^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/../restormer/restormer_arch.py", line 248, in forward
+    out_enc_level3 = self.encoder_level3(inp_enc_level3)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/../restormer/restormer_arch.py", line 141, in forward
+    x = x + self.attn(self.norm1(x))
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/1024_whs/IVfusion_method1/model/stage1/../restormer/restormer_arch.py", line 111, in forward
+    q = rearrange(q, 'b (head c) h w -> b head c (h w)', head=self.num_heads)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/.local/lib/python3.11/site-packages/einops/einops.py", line 600, in rearrange
+    return reduce(tensor, pattern, reduction="rearrange", **axes_lengths)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

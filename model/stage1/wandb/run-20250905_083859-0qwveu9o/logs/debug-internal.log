@@ -1,0 +1,13 @@
+{"time":"2025-09-05T08:39:00.124558229+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-05T08:39:02.02261556+08:00","level":"INFO","msg":"stream: created new stream","id":"0qwveu9o"}
+{"time":"2025-09-05T08:39:02.022713489+08:00","level":"INFO","msg":"stream: started","id":"0qwveu9o"}
+{"time":"2025-09-05T08:39:02.022811179+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"0qwveu9o"}
+{"time":"2025-09-05T08:39:02.022900553+08:00","level":"INFO","msg":"handler: started","stream_id":"0qwveu9o"}
+{"time":"2025-09-05T08:39:02.022982314+08:00","level":"INFO","msg":"sender: started","stream_id":"0qwveu9o"}
+{"time":"2025-09-05T09:07:03.593733917+08:00","level":"INFO","msg":"api: retrying HTTP error","status":502,"url":"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneVehicle_infrared/0qwveu9o/file_stream","body":"\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>502 Server Error</title>\n</head>\n<body text=#000000 bgcolor=#ffffff>\n<h1>Error: Server Error</h1>\n<h2>The server encountered a temporary error and could not complete your request.<p>Please try again in 30 seconds.</h2>\n<h2></h2>\n</body></html>\n"}
+{"time":"2025-09-05T09:40:42.715179464+08:00","level":"INFO","msg":"stream: closing","id":"0qwveu9o"}
+{"time":"2025-09-05T09:40:44.384772053+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-05T09:40:45.07883527+08:00","level":"INFO","msg":"handler: closed","stream_id":"0qwveu9o"}
+{"time":"2025-09-05T09:40:45.07888856+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"0qwveu9o"}
+{"time":"2025-09-05T09:40:45.078915706+08:00","level":"INFO","msg":"sender: closed","stream_id":"0qwveu9o"}
+{"time":"2025-09-05T09:40:45.078991763+08:00","level":"INFO","msg":"stream: closed","id":"0qwveu9o"}

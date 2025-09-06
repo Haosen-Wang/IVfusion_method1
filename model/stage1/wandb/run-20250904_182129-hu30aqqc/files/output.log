@@ -12,5 +12,32 @@ Epoch 2/5: 100%|█████████████████████�
 ✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/best_model.pth (56.4MB)
 ✓ 新的最佳模型已保存！ (Epoch 2)
 Epoch [2/5],Train Loss: 4.2514 🏆
-Epoch 3/5:  53%|████████████████████████████████████▋                                | 717/1350 [18:18<16:51,  1.60s/it]
+Epoch 3/5: 100%|████████████████████████████████████████████████████████████████████| 1350/1350 [34:20<00:00,  1.53s/it]
 当前学习率: 0.000655
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/checkpoint_epoch_3.pth (56.4MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/best_model.pth (56.4MB)
+✓ 新的最佳模型已保存！ (Epoch 3)
+Epoch [3/5],Train Loss: 4.0606 🏆
+Epoch 4/5: 100%|████████████████████████████████████████████████████████████████████| 1350/1350 [34:18<00:00,  1.52s/it]
+当前学习率: 0.000345
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/checkpoint_epoch_4.pth (56.4MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/best_model.pth (56.4MB)
+✓ 新的最佳模型已保存！ (Epoch 4)
+Epoch [4/5],Train Loss: 3.9205 🏆
+Epoch 5/5: 100%|████████████████████████████████████████████████████████████████████| 1350/1350 [34:25<00:00,  1.53s/it]
+当前学习率: 0.000095
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/checkpoint_epoch_5.pth (56.4MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/best_model.pth (56.4MB)
+✓ 新的最佳模型已保存！ (Epoch 5)
+Epoch [5/5],Train Loss: 3.8062 🏆
+
+训练完成！最佳模型来自 Epoch 5
+检查点保存路径: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible
+
+🎉 训练完成！
+📊 最佳模型: Epoch 5, Loss: 3.8062
+💾 模型检查点保存在: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible
+✓ 最佳模型路径: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneVehicle_visible/best_model.pth

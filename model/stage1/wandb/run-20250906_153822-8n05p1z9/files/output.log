@@ -1,0 +1,43 @@
+Epoch 1/5: 100%|██████████████████████████████████████████████████████████████████████| 113/113 [02:52<00:00,  1.53s/it]
+当前学习率: 0.001000
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/checkpoint_epoch_1.pth (56.4MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/best_model.pth (56.4MB)
+✓ 新的最佳模型已保存！ (Epoch 1)
+Epoch [1/5],Train Loss: 3.8551 🏆
+Epoch 2/5: 100%|██████████████████████████████████████████████████████████████████████| 113/113 [02:53<00:00,  1.53s/it]
+当前学习率: 0.000905
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/checkpoint_epoch_2.pth (56.4MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/best_model.pth (56.4MB)
+✓ 新的最佳模型已保存！ (Epoch 2)
+Epoch [2/5],Train Loss: 3.7809 🏆
+Epoch 3/5: 100%|██████████████████████████████████████████████████████████████████████| 113/113 [02:56<00:00,  1.56s/it]
+当前学习率: 0.000655
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/checkpoint_epoch_3.pth (56.4MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/best_model.pth (56.4MB)
+✓ 新的最佳模型已保存！ (Epoch 3)
+Epoch [3/5],Train Loss: 3.7129 🏆
+Epoch 4/5: 100%|██████████████████████████████████████████████████████████████████████| 113/113 [02:51<00:00,  1.52s/it]
+当前学习率: 0.000345
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/checkpoint_epoch_4.pth (56.4MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/best_model.pth (56.4MB)
+✓ 新的最佳模型已保存！ (Epoch 4)
+Epoch [4/5],Train Loss: 3.6253 🏆
+Epoch 5/5: 100%|██████████████████████████████████████████████████████████████████████| 113/113 [02:51<00:00,  1.52s/it]
+当前学习率: 0.000095
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/checkpoint_epoch_5.pth (56.4MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/best_model.pth (56.4MB)
+✓ 新的最佳模型已保存！ (Epoch 5)
+Epoch [5/5],Train Loss: 3.5335 🏆
+
+训练完成！最佳模型来自 Epoch 5
+检查点保存路径: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible
+
+🎉 训练完成！
+📊 最佳模型: Epoch 5, Loss: 3.5335
+💾 模型检查点保存在: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible
+✓ 最佳模型路径: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/best_model.pth

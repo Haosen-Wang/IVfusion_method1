@@ -1,0 +1,13 @@
+{"time":"2025-09-06T15:38:22.798756529+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-06T15:38:23.646886128+08:00","level":"INFO","msg":"stream: created new stream","id":"8n05p1z9"}
+{"time":"2025-09-06T15:38:23.646950134+08:00","level":"INFO","msg":"stream: started","id":"8n05p1z9"}
+{"time":"2025-09-06T15:38:23.64699439+08:00","level":"INFO","msg":"sender: started","stream_id":"8n05p1z9"}
+{"time":"2025-09-06T15:38:23.646997771+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"8n05p1z9"}
+{"time":"2025-09-06T15:38:23.647013134+08:00","level":"INFO","msg":"handler: started","stream_id":"8n05p1z9"}
+{"time":"2025-09-06T15:49:56.799828474+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_LLVIP_visible/8n05p1z9/file_stream\": EOF"}
+{"time":"2025-09-06T15:52:59.661190958+08:00","level":"INFO","msg":"stream: closing","id":"8n05p1z9"}
+{"time":"2025-09-06T15:53:01.511903492+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-06T15:53:03.236878973+08:00","level":"INFO","msg":"handler: closed","stream_id":"8n05p1z9"}
+{"time":"2025-09-06T15:53:03.236949414+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"8n05p1z9"}
+{"time":"2025-09-06T15:53:03.236992391+08:00","level":"INFO","msg":"sender: closed","stream_id":"8n05p1z9"}
+{"time":"2025-09-06T15:53:03.237123659+08:00","level":"INFO","msg":"stream: closed","id":"8n05p1z9"}

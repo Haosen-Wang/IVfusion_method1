@@ -158,15 +158,18 @@ def train_epoch_model(model, train_loader, criterion, optimizer, device_1, devic
             torch.cuda.empty_cache()
             loss_all= criterion(Ic_image, d_image, c_image, n, mu_n, sigma2_n)
             del d_image,c_image,Ic_image,n,mu_n,sigma2_n
+            torch.cuda.empty_cache()
             loss=loss_all["total_loss"]
-            
-            # 检测 NaN 和 Inf
+            torch.cuda.empty_cache()
             if torch.isnan(loss) or torch.isinf(loss):
                 print(f"⚠️  批次 {batch_idx} 检测到 NaN/Inf 损失，跳过此批次...")
+                torch.cuda.empty_cache()
                 print(f"损失详情: {loss_all}")
                 del loss_all
                 torch.cuda.empty_cache()
                 continue
+            # 检测 NaN 和 Inf
+            
 
             # 反向传播
             loss.backward()
@@ -177,11 +180,13 @@ def train_epoch_model(model, train_loader, criterion, optimizer, device_1, devic
             optimizer.step()
             optimizer.zero_grad()
             wandb.log(loss_all)
+            del loss_all
             torch.cuda.empty_cache()
             
             # 统计损失
             running_loss += loss.item()
             epoch_loss += loss.item()
+            torch.cuda.empty_cache()
 
                 
                 
@@ -194,7 +199,7 @@ def train_epoch_model(model, train_loader, criterion, optimizer, device_1, devic
                 raise e
                 
     return epoch_loss
-def train_model(model, train_loader, criterion, optimizer, device_1, device_2, project_name, num_epochs=10, val_loader=None, checkpoint_dir="./checkpoints"):
+def train_model(model, train_loader, criterion, optimizer, device_1, device_2, project_name,best_train_loss,num_epochs=10, val_loader=None, checkpoint_dir="./checkpoints"):
     """
     训练函数，集成wandb监控和检查点保存
     
@@ -217,7 +222,7 @@ def train_model(model, train_loader, criterion, optimizer, device_1, device_2, p
     
     # 初始化最佳性能指标
     best_val_loss = float('inf')
-    best_train_loss = float('inf') 
+    best_train_loss = best_train_loss
     best_epoch = 0
     
     model.train()
@@ -417,7 +422,7 @@ def resume_training(model, optimizer, checkpoint_dir="/data/1024whs_checkpoint/D
                   f"文件大小: {info['file_size_mb']:.1f}MB")
         
         # 内存高效加载
-        epoch, _, _ = load_checkpoint(model, optimizer, latest_checkpoint, 
+        epoch, train_loss, _ = load_checkpoint(model, optimizer, latest_checkpoint, 
                                     memory_efficient=memory_efficient, 
                                     load_optimizer=load_optimizer)
         
@@ -426,10 +431,10 @@ def resume_training(model, optimizer, checkpoint_dir="/data/1024whs_checkpoint/D
             torch.cuda.empty_cache()
         gc.collect()
         
-        return 0  # 下一个epoch
+        return 0,train_loss  # 下一个epoch
     else:
         print("🆕 未找到最新检查点，从头开始训练")
-        return 0
+        return 0,0
 
 
 def check_data(d_dataset,c_dataset):
@@ -530,7 +535,7 @@ def main(d_data_dir, c_data_dir, project_name, batch_size, num_epochs=10, device
     # 是否从检查点恢复训练
     start_epoch = 0
     if resume_from_checkpoint:
-        start_epoch = resume_training(
+        start_epoch,best_train_loss = resume_training(
             model, optimizer, checkpoint_dir, 
             memory_efficient=memory_efficient, 
             load_optimizer=load_optimizer_state
@@ -553,6 +558,7 @@ def main(d_data_dir, c_data_dir, project_name, batch_size, num_epochs=10, device
         device_1=device_1, 
         device_2=device_2,  
         project_name=project_name,
+        best_train_loss=best_train_loss,
         num_epochs=remaining_epochs, 
         val_loader=None,  # 如果有验证数据，在这里传入
         checkpoint_dir=checkpoint_dir

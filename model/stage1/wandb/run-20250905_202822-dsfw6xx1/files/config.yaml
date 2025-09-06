@@ -1,0 +1,72 @@
+_wandb:
+    value:
+        cli_version: 0.21.0
+        e:
+            ecrqbbnw7kb80gbe979xbzlq0s144e64:
+                args:
+                    - --config
+                    - train_config/LLVIP/noise15.yaml
+                codePath: model/stage1/train_dc.py
+                codePathLocal: train_dc.py
+                cpu_count: 24
+                cpu_count_logical: 48
+                cudaVersion: "12.8"
+                disk:
+                    /:
+                        total: "4760084709376"
+                        used: "2800019570688"
+                email: 3020233040@tju.edu.cn
+                executable: /opt/conda/bin/python
+                git:
+                    commit: 9c8007ca046755e437b7ea7785d726356727a4d5
+                    remote: https://github.com/Haosen-Wang/IVfusion_method1.git
+                gpu: NVIDIA GeForce RTX 4090
+                gpu_count: 4
+                gpu_nvidia:
+                    - architecture: Ada
+                      cudaCores: 16384
+                      memoryTotal: "25757220864"
+                      name: NVIDIA GeForce RTX 4090
+                      uuid: GPU-06783584-d287-7c20-a24a-076403ac358f
+                    - architecture: Ada
+                      cudaCores: 16384
+                      memoryTotal: "25757220864"
+                      name: NVIDIA GeForce RTX 4090
+                      uuid: GPU-15ee6b44-70cc-9141-7d07-432c2fa24f21
+                    - architecture: Ada
+                      cudaCores: 16384
+                      memoryTotal: "25757220864"
+                      name: NVIDIA GeForce RTX 4090
+                      uuid: GPU-e980f3ca-bd70-4d09-6169-a86d885920c2
+                    - architecture: Ada
+                      cudaCores: 16384
+                      memoryTotal: "25757220864"
+                      name: NVIDIA GeForce RTX 4090
+                      uuid: GPU-1858fe9e-f13e-2407-9132-c76e389a3fe5
+                host: docker
+                memory:
+                    total: "269878276096"
+                os: Linux-6.8.0-40-generic-x86_64-with-glibc2.35
+                program: /home/user/1024_whs/IVfusion_method1/model/stage1/train_dc.py
+                python: CPython 3.11.13
+                root: /home/user/1024_whs/IVfusion_method1/model/stage1
+                startedAt: "2025-09-05T12:28:22.311303Z"
+                writerId: ecrqbbnw7kb80gbe979xbzlq0s144e64
+        m: []
+        python_version: 3.11.13
+        t:
+            "1":
+                - 1
+                - 11
+                - 41
+                - 49
+            "2":
+                - 1
+                - 11
+                - 41
+                - 49
+            "4": 3.11.13
+            "5": 0.21.0
+            "6": 4.55.4
+            "12": 0.21.0
+            "13": linux-x86_64

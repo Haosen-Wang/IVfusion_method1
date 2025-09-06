@@ -12,7 +12,7 @@
 # 设置默认参数
 DEFAULT_CONFIG=""
 DEFAULT_EXPERIMENT=""
-DEFAULT_GPUS="2,3"
+DEFAULT_GPUS="3,2"
 
 # 初始化参数
 CONFIG_FILE="$DEFAULT_CONFIG"
@@ -29,7 +29,7 @@ USE_CONFIG=false================================================================
 # 设置默认参数
 DEFAULT_CONFIG=""
 DEFAULT_EXPERIMENT=""
-DEFAULT_GPUS="2,3"
+DEFAULT_GPUS="3,2"
 
 # 初始化参数
 CONFIG_FILE=$DEFAULT_CONFIG

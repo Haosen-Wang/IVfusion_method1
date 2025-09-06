@@ -59,6 +59,7 @@ def train_epoch_model(model, train_loader, criterion, optimizer, device_1, devic
             if torch.isnan(loss) or torch.isinf(loss):
                 print(f"⚠️  批次 {batch_idx} 检测到 NaN/Inf 损失，跳过此批次...")
                 print(f"损失详情: {loss_all}")
+                del loss_all
                 torch.cuda.empty_cache()
                 continue
 
@@ -308,7 +309,7 @@ def check_data(i_dataset,v_dataset):
     
      print(f"最终配对数量: 红外图像{len(i_dataset)}, 可见光图像{len(v_dataset)}")
 
-def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device_1="cuda:0", device_2="cuda:1", device_3="cuda:2", resume_from_checkpoint=True,i_block_num=2,v_block_num=2,i_expert_num=3,v_expert_num=3,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=3):
+def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device_1="cuda:0", device_2="cuda:1", device_3="cuda:2", resume_from_checkpoint=True,i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2):
     # 为红外图像（单通道）创建变换
     transform_i = transforms.Compose([
         transforms.Resize((224,224)),  # 调整图像大小
@@ -344,7 +345,7 @@ def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device
     torch.cuda.empty_cache()  # 清理GPU缓存
     
     # 初始化模型、损失函数、优化器
-    model = IV_fusion_model(i_block_num=2,v_block_num=2,i_expert_num=3,v_expert_num=3,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=3)  # 你的模型
+    model = IV_fusion_model(i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2)  # 你的模型
     
     criterion = Loss()  # 你的损失函数
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)  # 降低学习率
