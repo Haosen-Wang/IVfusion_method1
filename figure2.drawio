@@ -1723,14 +1723,14 @@
         <mxCell id="3bAkzcKRMOSaLEBe3D0I-1237" value="" style="rounded=0;whiteSpace=wrap;html=1;container=0;" vertex="1" parent="1">
           <mxGeometry x="2391.71" y="599.45" width="198.8542938045155" height="85.13477261113948" as="geometry" />
         </mxCell>
-        <mxCell id="3bAkzcKRMOSaLEBe3D0I-1238" value="&lt;font style=&quot;font-size: 18px;&quot; face=&quot;Times New Roman&quot;&gt;&lt;b&gt;Clean Visible Image&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="3bAkzcKRMOSaLEBe3D0I-1238" value="&lt;font style=&quot;font-size: 18px;&quot; face=&quot;Times New Roman&quot;&gt;&lt;b&gt;Clean Infrared Image&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="2390" y="564.5900000000001" width="202.2689634961082" height="30.95809913132345" as="geometry" />
         </mxCell>
-        <mxCell id="3bAkzcKRMOSaLEBe3D0I-1239" value="&lt;font style=&quot;font-size: 30px;&quot;&gt;&lt;span&gt;&lt;span&gt;$$I_C^{V}$$&lt;/span&gt;&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=18;fontFamily=Times New Roman;" vertex="1" parent="1">
+        <mxCell id="3bAkzcKRMOSaLEBe3D0I-1239" value="&lt;font style=&quot;font-size: 30px;&quot;&gt;&lt;span&gt;&lt;span&gt;$$I_C^{I}$$&lt;/span&gt;&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=18;fontFamily=Times New Roman;" vertex="1" parent="1">
           <mxGeometry x="2391.71" y="530" width="202.2689634961082" height="30.95809913132345" as="geometry" />
         </mxCell>
         <mxCell id="3bAkzcKRMOSaLEBe3D0I-1241" value="" style="rounded=0;whiteSpace=wrap;html=1;container=0;fillColor=default;dashed=1;dashPattern=8 8;" vertex="1" parent="1">
-          <mxGeometry x="2370" y="777.5" width="205.28" height="229.43" as="geometry" />
+          <mxGeometry x="2390" y="741.35" width="210" height="229.43" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
