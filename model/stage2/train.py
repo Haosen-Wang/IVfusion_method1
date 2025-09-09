@@ -31,18 +31,20 @@ def train_epoch_model(model, train_loader, criterion, optimizer, device_1, devic
     running_loss = 0.0
     epoch_loss = 0.0
     
-    # 清理GPU缓存
+    # 清理GPU缓存并打印初始显存状态
     torch.cuda.empty_cache()
     
     for batch_idx, (i_image, v_image) in enumerate(pbar):
         try:
+            # 前向传播
             output, l, g, mu_l, sigma2_l, mu_g, sigma2_g = model(i_image, v_image, device_1, device_2, device_3)
             
-            # 计算损失
-            criterion=criterion.to(device_3)
-            # 将模型输出移动到device_3
-            i_image=i_image.to(device_3)
-            v_image=v_image.to(device_3)
+            # 将损失函数移动到目标设备
+            criterion = criterion.to(device_3)
+            
+            # 将所有张量移动到device_3（如果还没有的话）
+            i_image = i_image.to(device_3)
+            v_image = v_image.to(device_3)
             output = output.to(device_3)
             l = l.to(device_3)
             g = g.to(device_3)
@@ -50,17 +52,47 @@ def train_epoch_model(model, train_loader, criterion, optimizer, device_1, devic
             sigma2_l = sigma2_l.to(device_3)
             mu_g = mu_g.to(device_3)
             sigma2_g = sigma2_g.to(device_3)
-            torch.cuda.empty_cache()
-            loss_all= criterion(output, i_image, v_image, l, g, mu_l, sigma2_l, mu_g, sigma2_g)
-            del i_image,v_image,output,l,g,mu_l,sigma2_l,mu_g,sigma2_g
-            loss=loss_all["total_loss"]
             
+            # 计算损失
+            loss_all = criterion(output, i_image, v_image, l, g, mu_l, sigma2_l, mu_g, sigma2_g)
+            
+            # 立即释放不再需要的大张量，减少显存峰值
+            del output, l, g, mu_l, sigma2_l, mu_g, sigma2_g
+            torch.cuda.empty_cache()
+            
+            loss = loss_all["total_loss"]
             # 检测 NaN 和 Inf
             if torch.isnan(loss) or torch.isinf(loss):
                 print(f"⚠️  批次 {batch_idx} 检测到 NaN/Inf 损失，跳过此批次...")
                 print(f"损失详情: {loss_all}")
-                del loss_all
+                
+                # 立即删除所有相关变量，释放显存
+                del loss_all, loss
+                # 如果有其他局部变量也需要删除
+                if 'output' in locals():
+                    del output
+                if 'l' in locals():
+                    del l
+                if 'g' in locals():
+                    del g
+                if 'mu_l' in locals():
+                    del mu_l
+                if 'sigma2_l' in locals():
+                    del sigma2_l
+                if 'mu_g' in locals():
+                    del mu_g
+                if 'sigma2_g' in locals():
+                    del sigma2_g
+                
+                # 清空梯度缓存（防止累积错误梯度）
+                optimizer.zero_grad()
+                
+                # 强制清理GPU缓存
                 torch.cuda.empty_cache()
+                
+                # 重置CUDA内存统计（可选）
+                torch.cuda.reset_peak_memory_stats()
+                
                 continue
 
             # 反向传播
@@ -77,13 +109,39 @@ def train_epoch_model(model, train_loader, criterion, optimizer, device_1, devic
             # 统计损失
             running_loss += loss.item()
             epoch_loss += loss.item()
+            
+            # 释放剩余的损失相关变量
+            del loss_all, loss, i_image, v_image
+            
+            # 定期清理GPU缓存（每10个batch或在批次结束时）
+            if batch_idx % 10 == 0 or batch_idx == len(pbar) - 1:
+                torch.cuda.empty_cache()
 
                 
                 
         except RuntimeError as e:
             if "out of memory" in str(e):
-                print(f"⚠️  批次 {batch_idx} 内存不足，跳过...")
+                print(f"⚠️  批次 {batch_idx} 内存不足，清理显存...")
+                
+                # 清理所有可能的局部变量
+                local_vars = locals()
+                tensor_vars = ['output', 'l', 'g', 'mu_l', 'sigma2_l', 'mu_g', 'sigma2_g', 
+                              'loss_all', 'loss', 'i_image', 'v_image']
+                
+                for var_name in tensor_vars:
+                    if var_name in local_vars:
+                        del local_vars[var_name]
+                
+                # 清空梯度
+                optimizer.zero_grad()
+                
+                # 强制清理GPU缓存
                 torch.cuda.empty_cache()
+                
+                # 重置内存统计
+                torch.cuda.reset_peak_memory_stats()
+                
+                print(f"💾 显存清理完成，当前显存使用: {torch.cuda.memory_allocated(device_3)/1024**3:.2f}GB")
                 continue
             else:
                 raise e
@@ -408,9 +466,9 @@ def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device
 
 if __name__ == "__main__":
     config_dic = {
-        "i_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/DroneVehicle/infrared",
-        "v_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/DroneVehicle/visible",
-        "project_name": "Train_IVfusion_DroneVehicle",
+        "i_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/MSRS/infrared",
+        "v_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/MSRS/visible",
+        "project_name": "Train_IVfusion_M3FD",
         "batch_size": 2,  # 减小批次大小从2到1
         "num_epochs": 5,
         "device_1": "cuda:0", 

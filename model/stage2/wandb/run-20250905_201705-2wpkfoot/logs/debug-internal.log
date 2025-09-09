@@ -38,3 +38,10 @@
 {"time":"2025-09-06T16:55:59.424743871+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/2wpkfoot/file_stream\": EOF"}
 {"time":"2025-09-06T17:02:13.877201039+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/2wpkfoot/file_stream\": EOF"}
 {"time":"2025-09-06T17:04:28.538628648+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/2wpkfoot/file_stream\": unexpected EOF"}
+{"time":"2025-09-06T22:43:20.032792946+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_IVfusion_DroneVehicle/2wpkfoot/file_stream\": EOF"}
+{"time":"2025-09-06T22:59:04.510944608+08:00","level":"INFO","msg":"stream: closing","id":"2wpkfoot"}
+{"time":"2025-09-06T22:59:06.9538684+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-06T22:59:12.182371172+08:00","level":"INFO","msg":"handler: closed","stream_id":"2wpkfoot"}
+{"time":"2025-09-06T22:59:12.182442126+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"2wpkfoot"}
+{"time":"2025-09-06T22:59:12.182474036+08:00","level":"INFO","msg":"sender: closed","stream_id":"2wpkfoot"}
+{"time":"2025-09-06T22:59:12.202765022+08:00","level":"INFO","msg":"stream: closed","id":"2wpkfoot"}

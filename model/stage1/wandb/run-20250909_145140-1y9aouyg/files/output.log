@@ -1,0 +1,32 @@
+Epoch 1/5: 100%|██████████████████████████████████████████████████████████████████████| 173/173 [03:07<00:00,  1.08s/it]
+当前学习率: 0.001000
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_M3FD_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_M3FD_visible/checkpoint_epoch_1.pth (56.4MB)
+Epoch [1/5],Train Loss: 3.7460
+Epoch 2/5: 100%|██████████████████████████████████████████████████████████████████████| 173/173 [03:26<00:00,  1.20s/it]
+当前学习率: 0.000905
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_M3FD_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_M3FD_visible/checkpoint_epoch_2.pth (56.4MB)
+Epoch [2/5],Train Loss: 3.5324
+Epoch 3/5: 100%|██████████████████████████████████████████████████████████████████████| 173/173 [03:19<00:00,  1.15s/it]
+当前学习率: 0.000655
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_M3FD_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_M3FD_visible/checkpoint_epoch_3.pth (56.4MB)
+Epoch [3/5],Train Loss: 3.0709
+Epoch 4/5: 100%|██████████████████████████████████████████████████████████████████████| 173/173 [03:20<00:00,  1.16s/it]
+当前学习率: 0.000345
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_M3FD_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_M3FD_visible/checkpoint_epoch_4.pth (56.4MB)
+Epoch [4/5],Train Loss: 2.7467
+Epoch 5/5: 100%|██████████████████████████████████████████████████████████████████████| 173/173 [03:15<00:00,  1.13s/it]
+当前学习率: 0.000095
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_M3FD_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_M3FD_visible/checkpoint_epoch_5.pth (56.4MB)
+Epoch [5/5],Train Loss: 2.5108
+
+训练完成！最佳模型来自 Epoch 0
+检查点保存路径: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_M3FD_visible
+
+🎉 训练完成！
+📊 最佳模型: Epoch 0, Loss: 0.0000
+💾 模型检查点保存在: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_M3FD_visible

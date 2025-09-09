@@ -1,0 +1,13 @@
+{"time":"2025-09-06T20:34:29.173906361+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-06T20:34:30.019990648+08:00","level":"INFO","msg":"stream: created new stream","id":"z9xw7gdh"}
+{"time":"2025-09-06T20:34:30.020048492+08:00","level":"INFO","msg":"stream: started","id":"z9xw7gdh"}
+{"time":"2025-09-06T20:34:30.020093361+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"z9xw7gdh"}
+{"time":"2025-09-06T20:34:30.0201238+08:00","level":"INFO","msg":"handler: started","stream_id":"z9xw7gdh"}
+{"time":"2025-09-06T20:34:30.020126334+08:00","level":"INFO","msg":"sender: started","stream_id":"z9xw7gdh"}
+{"time":"2025-09-06T20:44:53.400690342+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneRGBT_visible/z9xw7gdh/file_stream\": EOF"}
+{"time":"2025-09-06T20:53:10.814038228+08:00","level":"INFO","msg":"stream: closing","id":"z9xw7gdh"}
+{"time":"2025-09-06T20:53:12.273917679+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-06T20:53:14.805460808+08:00","level":"INFO","msg":"handler: closed","stream_id":"z9xw7gdh"}
+{"time":"2025-09-06T20:53:14.805489896+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"z9xw7gdh"}
+{"time":"2025-09-06T20:53:14.805541931+08:00","level":"INFO","msg":"sender: closed","stream_id":"z9xw7gdh"}
+{"time":"2025-09-06T20:53:14.805676476+08:00","level":"INFO","msg":"stream: closed","id":"z9xw7gdh"}

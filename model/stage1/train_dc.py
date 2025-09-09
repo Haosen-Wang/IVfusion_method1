@@ -434,7 +434,7 @@ def resume_training(model, optimizer, checkpoint_dir="/data/1024whs_checkpoint/D
         return 0,train_loss  # 下一个epoch
     else:
         print("🆕 未找到最新检查点，从头开始训练")
-        return 0,0
+        return 0,0.0
 
 
 def check_data(d_dataset,c_dataset):
@@ -540,7 +540,6 @@ def main(d_data_dir, c_data_dir, project_name, batch_size, num_epochs=10, device
             memory_efficient=memory_efficient, 
             load_optimizer=load_optimizer_state
         )
-    
     # 调整训练轮数
     remaining_epochs = max(0, num_epochs - start_epoch)
     if remaining_epochs == 0:
