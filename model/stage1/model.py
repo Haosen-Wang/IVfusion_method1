@@ -1,12 +1,19 @@
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+import importlib.util
+
+# 添加当前目录和父目录到Python路径
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, current_dir)  # 优先搜索当前目录
+sys.path.append(parent_dir)
+
 from restormer.restormer_arch import Restormer
 import torch
 import transformers
 import torch.nn as nn
-from component import VI_Encoder, VI_Decoder, Noise_Multi_Expert_Decoder
-from component import Fusion_Net,VI_Z
+from stage1.component import VI_Encoder, VI_Decoder, Noise_Multi_Expert_Decoder
+from stage1.component import Fusion_Net,VI_Z
 class Noise_encoder_decoder(nn.Module):
     def __init__(self,block_num=2,expert_num=4,topk_expert=2,alpha=1.0,mode="L"):
         super(Noise_encoder_decoder,self).__init__()
@@ -27,7 +34,7 @@ class Noise_encoder_decoder(nn.Module):
 
 
 class Degrad_restore_model(nn.Module):
-    def __init__(self,i_block_num=2,v_block_num=2,i_expert_num=3,v_expert_num=3,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=3,mode="L"):
+    def __init__(self,i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2,mode="L"):
         super(Degrad_restore_model,self).__init__()
         self.noise_encoder_decoder=Noise_encoder_decoder(block_num=i_block_num,expert_num=i_expert_num,topk_expert=i_topk_expert,alpha=i_alpha,mode=mode)
         self.fusion_net=Fusion_Net(block_num=f_block_num,mode=mode)

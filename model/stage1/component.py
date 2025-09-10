@@ -103,7 +103,7 @@ class Noise_Multi_Expert_Decoder(nn.Module):
 
 
 class Fusion_Net(nn.Module):
-    def __init__(self,block_num=4,mode="RGB"):
+    def __init__(self,block_num=2,mode="RGB"):
         super(Fusion_Net,self).__init__()
         self.model=nn.Sequential()
         if mode=="RGB":
@@ -133,8 +133,9 @@ class VI_Z(nn.Module):
         return mu,sigma2
     def forward(self,z):
         self.mu,self.sigma2=self.get_mu_sigma2(z)
-        epsil=torch.randn_like(self.sigma2)
-        self.out=self.mu+self.alpha*torch.sqrt(torch.abs(self.sigma2))*epsil
+        #epsil = torch.normal(mean=0.025, std=0.01, size=self.sigma2.shape, 
+                      #device=self.sigma2.device, dtype=self.sigma2.dtype)
+        self.out=self.mu+self.alpha*torch.sqrt(torch.abs(self.sigma2))
         return self.out,self.mu,self.sigma2
 
         

@@ -326,8 +326,6 @@ def load_checkpoint(model, optimizer, checkpoint_path):
         checkpoint = torch.load(checkpoint_path)
         
         model.load_state_dict(checkpoint['model_state_dict'])
-        if optimizer is not None:
-            optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         
         epoch = checkpoint['epoch']
         train_loss = checkpoint['train_loss']
@@ -404,7 +402,7 @@ def check_data(i_dataset,v_dataset):
 def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device_1="cuda:0", device_2="cuda:1", device_3="cuda:2", resume_from_checkpoint=True,i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2):
     # 为红外图像（单通道）创建变换
     transform_i = transforms.Compose([
-        transforms.Resize((256,256)),  # 调整图像大小
+        transforms.Resize((240,240)),  # 调整图像大小
         transforms.ToTensor(),          # 转换为张量 [0,1]
         transforms.Normalize(mean=[0.253], std=[0.191]) 
     ])
@@ -413,7 +411,7 @@ def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device
     # 为可见光图像（3通道）创建变换 - 提供多种标准化选择
     # 选项1: 通用标准化 [-1, 1]
     transform_v = transforms.Compose([
-        transforms.Resize((256,256)),  # 调整图像大小
+        transforms.Resize((240,240)),  # 调整图像大小
         transforms.ToTensor(),          # 转换为张量 [0,1]
         transforms.Normalize(mean=[0.188, 0.186, 0.154], std=[0.183, 0.190, 0.197]) 
     ])
@@ -525,11 +523,11 @@ if __name__ == "__main__":
         "i_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/LLVIP/infrared",
         "v_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/LLVIP/visible",
         "project_name": "Train_IVfusion_LLVIP",
-        "batch_size": 1,  # 减小批次大小从2到1
+        "batch_size": 2,  # 减小批次大小从2到1
         "num_epochs": 5,
         "device_1": "cuda:0", 
         "device_2": "cuda:1",
         "device_3": "cuda:2",
-        "resume_from_checkpoint": False  # 设置为True来从检查点恢复训练
+        "resume_from_checkpoint": True  # 设置为True来从检查点恢复训练
     }
     main(**config_dic)

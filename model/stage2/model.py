@@ -1,12 +1,12 @@
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from restormer.restormer_arch import Restormer
 import torch
 import transformers
 import torch.nn as nn
-from component import VI_Encoder, VI_Decoder, Local_Multi_Expert_Decoder
-from component import Global_Multi_Expert_Decoder,Fusion_Net,VI_Z
+from stage2.component import VI_Encoder, VI_Decoder, Local_Multi_Expert_Decoder
+from stage2.component import Global_Multi_Expert_Decoder,Fusion_Net,VI_Z
 class I_encoder_decoder(nn.Module):
     def __init__(self,block_num=2,expert_num=4,topk_expert=2,alpha=1.0):
         super(I_encoder_decoder,self).__init__()

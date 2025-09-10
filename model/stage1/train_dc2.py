@@ -513,13 +513,13 @@ def main(d_data_dir, c_data_dir, project_name, batch_size, num_epochs=10, device
         transform = transforms.Compose([
             transforms.Resize((240,240)),  # 调整图像大小
             transforms.ToTensor(),          # 转换为张量 [0,1]
-            transforms.Normalize(mean=[0.495], std=[0.19])#DRGBT  # 单通道标准化
+            transforms.Normalize(mean=[0.512], std=[0.212])#DVen  # 单通道标准化
         ])
     if mode=="RGB":
         transform = transforms.Compose([
             transforms.Resize((240,240)),  # 调整图像大小
             transforms.ToTensor(),
-            transforms.Normalize(mean=[0.349, 0.335, 0.353], std=[0.219, 0.205, 0.218])#DRGBT          # 转换为张量 [0,1]
+            transforms.Normalize(mean=[0.3321, 0.3293, 0.3238], std=[0.2516, 0.2461, 0.2423])#DVen          # 转换为张量 [0,1]
             #transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])  # RGB标准化
         ])
     
@@ -629,13 +629,13 @@ if __name__ == "__main__":
     parser.add_argument('--resume_from_checkpoint', default=True, action='store_true', help='是否从检查点恢复训练')
     parser.add_argument('--i_block_num', type=int, default=2, help='红外分支块数量')
     parser.add_argument('--v_block_num', type=int, default=2, help='可见光分支块数量')
-    parser.add_argument('--i_expert_num', type=int, default=4, help='红外专家数量')
-    parser.add_argument('--v_expert_num', type=int, default=4, help='可见光专家数量')
+    parser.add_argument('--i_expert_num', type=int, default=3, help='红外专家数量')
+    parser.add_argument('--v_expert_num', type=int, default=3, help='可见光专家数量')
     parser.add_argument('--i_topk_expert', type=int, default=2, help='红外topk专家')
     parser.add_argument('--v_topk_expert', type=int, default=2, help='可见光topk专家')
     parser.add_argument('--i_alpha', type=float, default=1.0, help='红外alpha参数')
     parser.add_argument('--v_alpha', type=float, default=1.0, help='可见光alpha参数')
-    parser.add_argument('--f_block_num', type=int, default=2, help='融合块数量')
+    parser.add_argument('--f_block_num', type=int, default=3, help='融合块数量')
     parser.add_argument('--mode', type=str, default="L", choices=["L", "RGB"], help='图像模式')
     
     args = parser.parse_args()
