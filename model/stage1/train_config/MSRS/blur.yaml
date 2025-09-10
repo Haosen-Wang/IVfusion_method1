@@ -7,7 +7,7 @@ training:
   project_name: "Train_Degradclean_MSRS_visible"
   batch_size: 2  # 小批次避免内存问题
   num_epochs: 5  # 快速测试
-  resume_from_checkpoint: true
+  resume_from_checkpoint: false
 
 device:
   device_1: "cuda:0"

@@ -55,7 +55,7 @@ class IV_fusion_model(nn.Module):
         self.fusion_net.to(device_3)
         Ic_i = i + l
         Ic_v = v + g
-        fused_input = Ic_i+Ic_v
+        fused_input = 0.5*Ic_i+0.5*Ic_v
         del Ic_i, Ic_v, i, v
         fusion = self.fusion_net(fused_input)
         return fusion, l,g,mu_l, sigma2_l, mu_g, sigma2_g

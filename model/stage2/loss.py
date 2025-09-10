@@ -185,7 +185,6 @@ class FusionLoss(nn.Module):
                 if inp.max() > 10 or inp.min() < -10:
                     print(f"⚠️ {name} 图像值范围异常: [{inp.min():.3f}, {inp.max():.3f}]")
                     # 限制到合理范围
-                    inputs[i] = torch.clamp(inp, -5, 5)
             
             fused, visible, infrared = inputs
             
@@ -213,6 +212,8 @@ class FusionLoss(nn.Module):
                          self.gradient_weight * gradient_loss +
                          self.ssim_weight * ssim_loss +
                          self.perceptual_weight * perceptual_loss)
+            #total_loss = (self.pixel_weight * pixel_loss + 
+                         #self.gradient_weight * gradient_loss)
             
             # 最终检查
             if torch.isnan(total_loss) or torch.isinf(total_loss):
@@ -259,14 +260,7 @@ class VI_Loss(nn.Module):
                 if torch.isinf(inp).any():
                     print(f"⚠️ VI_Loss输入 {name} 包含Inf值")
                     return self._safe_vi_loss_dict(i.device)
-            
-            # 限制输入范围，避免极值
-            i = torch.clamp(i, -10, 10)
-            v = torch.clamp(v, -10, 10)
-            g = torch.clamp(g, -10, 10)
-            l = torch.clamp(l, -10, 10)
-            mu_i = torch.clamp(mu_i, -10, 10)
-            mu_v = torch.clamp(mu_v, -10, 10)
+    
             
             # 计算目标值
             l_tru = torch.max(i, v)
@@ -326,9 +320,9 @@ class VI_Loss(nn.Module):
                 print(f"⚠️ KL损失计算出错: {e}")
                 kl_loss_i = torch.tensor(0.1, device=i.device, requires_grad=True)
                 kl_loss_g = torch.tensor(0.1, device=i.device, requires_grad=True)
-        
-            total_loss = 0.5 * (self.rec_loss_weight * rec_l + self.KL_loss_weight * kl_loss_i + self.KL_loss_weight * kl_loss_g + self.rec_loss_weight * rec_g)
 
+            #total_loss = 0.5 * (self.rec_loss_weight * rec_l + self.KL_loss_weight * kl_loss_i + self.rec_loss_weight * rec_g+self.KL_loss_weight * kl_loss_g)
+            total_loss = 0.5 * (self.rec_loss_weight * rec_l + self.rec_loss_weight * rec_g)
             # 最终检查
             if torch.isnan(total_loss) or torch.isinf(total_loss):
                 print(f"⚠️ VI总损失出现NaN/Inf: {total_loss}")

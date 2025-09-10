@@ -38,7 +38,12 @@ def train_epoch_model(model, train_loader, criterion, optimizer, device_1, devic
         try:
             # 前向传播
             output, l, g, mu_l, sigma2_l, mu_g, sigma2_g = model(i_image, v_image, device_1, device_2, device_3)
-            
+            if hasattr(model, 'parameters'):
+                for name, param in model.named_parameters():
+                    if param.grad is not None:
+                        grad_norm = param.grad.norm()
+                        if torch.isnan(grad_norm) or torch.isinf(grad_norm):
+                            print(f"异常梯度在 {name}: {grad_norm}")
             # 将损失函数移动到目标设备
             criterion = criterion.to(device_3)
             
@@ -52,6 +57,35 @@ def train_epoch_model(model, train_loader, criterion, optimizer, device_1, devic
             sigma2_l = sigma2_l.to(device_3)
             mu_g = mu_g.to(device_3)
             sigma2_g = sigma2_g.to(device_3)
+            #print(output,l,g,mu_l,sigma2_l,mu_g,sigma2_g)
+            # 处理NaN值，将NaN替换为0
+            if torch.isnan(output).any():
+                print(f"⚠️  批次 {batch_idx} 检测到 output 中的 NaN 值，将其替换为rand")
+                #output = torch.where(torch.isnan(output), torch.rand_like(output), output)
+
+            if torch.isnan(l).any():
+                print(f"⚠️  批次 {batch_idx} 检测到 l 中的 NaN 值，将其替换为0")
+                #l = torch.where(torch.isnan(l), torch.rand_like(l), l)
+                
+            if torch.isnan(g).any():
+                print(f"⚠️  批次 {batch_idx} 检测到 g 中的 NaN 值，将其替换为0")
+                #g = torch.where(torch.isnan(g), torch.rand_like(g), g)
+                
+            if torch.isnan(mu_l).any():
+                print(f"⚠️  批次 {batch_idx} 检测到 mu_l 中的 NaN 值，将其替换为0")
+                #mu_l = torch.where(torch.isnan(mu_l), torch.zeros_like(mu_l), mu_l)
+                
+            if torch.isnan(sigma2_l).any():
+                print(f"⚠️  批次 {batch_idx} 检测到 sigma2_l 中的 NaN 值，将其替换为小正数")
+                #sigma2_l = torch.where(torch.isnan(sigma2_l), torch.ones_like(sigma2_l)*0.01, sigma2_l)
+                
+            if torch.isnan(mu_g).any():
+                print(f"⚠️  批次 {batch_idx} 检测到 mu_g 中的 NaN 值，将其替换为0")
+                #mu_g = torch.where(torch.isnan(mu_g), torch.zeros_like(mu_g), mu_g)
+                
+            if torch.isnan(sigma2_g).any():
+                print(f"⚠️  批次 {batch_idx} 检测到 sigma2_g 中的 NaN 值，将其替换为小正数")
+                #sigma2_g = torch.where(torch.isnan(sigma2_g), torch.ones_like(sigma2_g)*0.01, sigma2_g)
             
             # 计算损失
             loss_all = criterion(output, i_image, v_image, l, g, mu_l, sigma2_l, mu_g, sigma2_g)
@@ -370,17 +404,39 @@ def check_data(i_dataset,v_dataset):
 def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device_1="cuda:0", device_2="cuda:1", device_3="cuda:2", resume_from_checkpoint=True,i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2):
     # 为红外图像（单通道）创建变换
     transform_i = transforms.Compose([
-        transforms.Resize((224,224)),  # 调整图像大小
+        transforms.Resize((256,256)),  # 调整图像大小
         transforms.ToTensor(),          # 转换为张量 [0,1]
-        transforms.Normalize(mean=[0.5], std=[0.5])  # 单通道标准化
+        transforms.Normalize(mean=[0.253], std=[0.191]) 
     ])
     
     # 为可见光图像（3通道）创建变换
+    # 为可见光图像（3通道）创建变换 - 提供多种标准化选择
+    # 选项1: 通用标准化 [-1, 1]
     transform_v = transforms.Compose([
-        transforms.Resize((224,224)),  # 调整图像大小
+        transforms.Resize((256,256)),  # 调整图像大小
         transforms.ToTensor(),          # 转换为张量 [0,1]
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])  # RGB标准化
+        transforms.Normalize(mean=[0.188, 0.186, 0.154], std=[0.183, 0.190, 0.197]) 
     ])
+    
+    # 选项2: ImageNet预训练标准化
+    # transform_v = transforms.Compose([
+    #     transforms.Resize((224,224)),
+    #     transforms.ToTensor(),
+    #     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])  # ImageNet标准化
+    # ])
+    
+    # 选项3: 不进行标准化，保持[0,1]范围
+    # transform_v = transforms.Compose([
+    #     transforms.Resize((224,224)),
+    #     transforms.ToTensor()  # 仅转换为张量，不标准化
+    # ])
+    
+    # 选项4: 自定义数据集统计标准化（需要预先计算均值和标准差）
+    # transform_v = transforms.Compose([
+    #     transforms.Resize((224,224)),
+    #     transforms.ToTensor(),
+    #     transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], std=[0.2023, 0.1994, 0.2010])  # 示例：CIFAR-10统计
+    # ])
     
     i_dataset = ImageDataset(i_data_dir, transform=transform_i, convert="L")
     v_dataset = ImageDataset(v_data_dir, transform=transform_v, convert="RGB")
@@ -406,7 +462,7 @@ def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device
     model = IV_fusion_model(i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2)  # 你的模型
     
     criterion = Loss()  # 你的损失函数
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)  # 降低学习率
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)  # 降低学习率
     
     # 参数检查
     total_params = sum(p.numel() for p in model.parameters())
@@ -466,10 +522,10 @@ def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device
 
 if __name__ == "__main__":
     config_dic = {
-        "i_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/MSRS/infrared",
-        "v_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/MSRS/visible",
-        "project_name": "Train_IVfusion_M3FD",
-        "batch_size": 2,  # 减小批次大小从2到1
+        "i_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/LLVIP/infrared",
+        "v_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/LLVIP/visible",
+        "project_name": "Train_IVfusion_LLVIP",
+        "batch_size": 1,  # 减小批次大小从2到1
         "num_epochs": 5,
         "device_1": "cuda:0", 
         "device_2": "cuda:1",

@@ -1,6 +1,6 @@
 data:
   d_data_dir: "/data/1024whs_data/DeMMI-RF/Train/degrad/DefocusBlur/DroneRGBT"
-  c_data_dir: "/data/1024whs_data/DeMMI-RF/Train/infrared/DefocusBlur/DroneRGBT"
+  c_data_dir: "/data/1024whs_data/DeMMI-RF/Train/visible/DefocusBlur/DroneRGBT"
   mode: "RGB"
 
 training:

@@ -145,7 +145,12 @@ def train_epoch_model(model, train_loader, criterion, optimizer, device_1, devic
     for batch_idx, (d_image, c_image) in enumerate(pbar):
         try:
             Ic_image, n, mu_n, sigma2_n =model(d_image,device_1, device_2)
-
+            if hasattr(model, 'parameters'):
+                for name, param in model.named_parameters():
+                    if param.grad is not None:
+                        grad_norm = param.grad.norm()
+                        if torch.isnan(grad_norm) or torch.isinf(grad_norm):
+                            print(f"异常梯度在 {name}: {grad_norm}")
             # 计算损失
             criterion=criterion.to(device_2)
             # 将模型输出移动到device_3
@@ -163,11 +168,34 @@ def train_epoch_model(model, train_loader, criterion, optimizer, device_1, devic
             torch.cuda.empty_cache()
             if torch.isnan(loss) or torch.isinf(loss):
                 print(f"⚠️  批次 {batch_idx} 检测到 NaN/Inf 损失，跳过此批次...")
-                torch.cuda.empty_cache()
                 print(f"损失详情: {loss_all}")
-                del loss_all
-                torch.cuda.empty_cache()
+                
+                # 立即删除所有相关变量，释放显存
+                del loss_all, loss
+                # 如果有其他局部变量也需要删除
+                if 'output' in locals():
+                    del output
+                if 'l' in locals():
+                    del l
+                if 'g' in locals():
+                    del g
+                if 'mu_l' in locals():
+                    del mu_l
+                if 'sigma2_l' in locals():
+                    del sigma2_l
+                if 'mu_g' in locals():
+                    del mu_g
+                if 'sigma2_g' in locals():
+                    del sigma2_g
                 continue
+                # 清空梯度缓存（防止累积错误梯度）
+                optimizer.zero_grad()
+                
+                # 强制清理GPU缓存
+                torch.cuda.empty_cache()
+                
+                # 重置CUDA内存统计（可选）
+                torch.cuda.reset_peak_memory_stats()
             # 检测 NaN 和 Inf
             
 
@@ -180,13 +208,18 @@ def train_epoch_model(model, train_loader, criterion, optimizer, device_1, devic
             optimizer.step()
             optimizer.zero_grad()
             wandb.log(loss_all)
-            del loss_all
             torch.cuda.empty_cache()
             
             # 统计损失
             running_loss += loss.item()
             epoch_loss += loss.item()
-            torch.cuda.empty_cache()
+            
+            # 释放剩余的损失相关变量
+            del loss_all, loss
+            
+            # 定期清理GPU缓存（每10个batch或在批次结束时）
+            if batch_idx % 10 == 0 or batch_idx == len(pbar) - 1:
+                torch.cuda.empty_cache()
 
                 
                 
@@ -513,7 +546,7 @@ def main(d_data_dir, c_data_dir, project_name, batch_size, num_epochs=10, device
     model = Degrad_restore_model(i_block_num=2,v_block_num=2,i_expert_num=3,v_expert_num=3,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=3,mode=mode)  # 你的模型
     
     criterion = Loss()  # 你的损失函数
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)  # 降低学习率
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)  # 降低学习率
     
     # 参数检查
     total_params = sum(p.numel() for p in model.parameters())
@@ -540,6 +573,9 @@ def main(d_data_dir, c_data_dir, project_name, batch_size, num_epochs=10, device
             memory_efficient=memory_efficient, 
             load_optimizer=load_optimizer_state
         )
+    else:
+        best_train_loss = float('inf')
+        print("🆕 从头开始训练")
     # 调整训练轮数
     remaining_epochs = max(0, num_epochs - start_epoch)
     if remaining_epochs == 0:

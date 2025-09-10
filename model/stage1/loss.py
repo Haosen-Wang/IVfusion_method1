@@ -101,7 +101,7 @@ class FusionLoss(nn.Module):
         perceptual_loss = self.perceptual_loss(clean_pre, clean)
 
         total_loss = (self.pixel_weight * pixel_loss +
-                     self.gradient_weight * gradient_loss +
+                     self.gradient_weight * gradient_loss+
                      self.ssim_weight * ssim_loss +
                      self.perceptual_weight * perceptual_loss)
 
@@ -127,7 +127,8 @@ class VI_Loss(nn.Module):
 
         kl_loss_n = -0.5 * torch.mean(1 + torch.log(sigma2_n_safe) - mu_n.pow(2) - sigma2_n_safe)
         # Combine losses
-        total_loss = 0.5*(self.rec_loss_weight * rec_n + self.KL_loss_weight * kl_loss_n)
+        #total_loss = 0.5*(self.rec_loss_weight * rec_n + self.KL_loss_weight * kl_loss_n)
+        total_loss =self.rec_loss_weight * rec_n
         return {
             'total_loss_vi': total_loss,
             'rec_n': rec_n,

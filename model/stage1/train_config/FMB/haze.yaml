@@ -1,13 +1,13 @@
 data:
-  d_data_dir: "/data/1024whs_data/DeMMI-RF/Train/degrad/haze/DroneVehicle"
-  c_data_dir: "/data/1024whs_data/DeMMI-RF/Train/visible/haze/DroneVehicle"
+  d_data_dir: "/data/1024whs_data/DeMMI-RF/Train/degrad/haze/FMB"
+  c_data_dir: "/data/1024whs_data/DeMMI-RF/Train/infrared/haze/FMB"
   mode: "RGB"
 
 training:
-  project_name: "Train_Degradclean_DroneVehicle_visible"
+  project_name: "Train_Degradclean_FMB_visible"
   batch_size: 2  # 小批次避免内存问题
   num_epochs: 5  # 快速测试
-  resume_from_checkpoint: True
+  resume_from_checkpoint: false
 
 device:
   device_1: "cuda:0"

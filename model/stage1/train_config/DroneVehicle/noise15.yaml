@@ -1,6 +1,6 @@
 data:
   d_data_dir: "/data/1024whs_data/DeMMI-RF/Train/degrad/noise15/DroneVehicle"
-  c_data_dir: "/data/1024whs_data/DeMMI-RF/Train/infrared/noise15/DroneVehicle"
+  c_data_dir: "/data/1024whs_data/DeMMI-RF/Train/visible/noise15/DroneVehicle"
   mode: "RGB"
 
 training:
