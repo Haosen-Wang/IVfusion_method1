@@ -1,0 +1,11 @@
+einops==0.8.1
+kornia==0.7.3
+lightning==2.3.3
+matplotlib==3.7.5
+opencv_python==4.10.0.84
+Pillow==11.3.0
+scipy==1.16.0
+torch==2.4.1
+torchvision==0.19.1
+tqdm==4.62.0
+wandb>=0.12.10
