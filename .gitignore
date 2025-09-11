@@ -76,3 +76,7 @@ wandb/
 # Model checkpoints
 *.ckpt
 checkpoints/
+ckpt/
+ckpt_ori/
+experiments/*/ckpt/
+experiments/*/ckpt_ori/
