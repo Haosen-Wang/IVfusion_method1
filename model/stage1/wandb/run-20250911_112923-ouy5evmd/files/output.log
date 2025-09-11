@@ -1,0 +1,32 @@
+Epoch 1/5: 100%|██████████████████████████████████████████████████████████████████████| 113/113 [03:50<00:00,  2.04s/it]
+当前学习率: 0.000100
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/checkpoint_epoch_1.pth (56.4MB)
+Epoch [1/5],Train Loss: 6.4997
+Epoch 2/5: 100%|██████████████████████████████████████████████████████████████████████| 113/113 [04:01<00:00,  2.14s/it]
+当前学习率: 0.000090
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/checkpoint_epoch_2.pth (56.4MB)
+Epoch [2/5],Train Loss: 5.8382
+Epoch 3/5: 100%|██████████████████████████████████████████████████████████████████████| 113/113 [03:58<00:00,  2.11s/it]
+当前学习率: 0.000065
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/checkpoint_epoch_3.pth (56.4MB)
+Epoch [3/5],Train Loss: 5.5992
+Epoch 4/5: 100%|██████████████████████████████████████████████████████████████████████| 113/113 [03:58<00:00,  2.11s/it]
+当前学习率: 0.000035
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/checkpoint_epoch_4.pth (56.4MB)
+Epoch [4/5],Train Loss: 5.4541
+Epoch 5/5: 100%|██████████████████████████████████████████████████████████████████████| 113/113 [03:50<00:00,  2.04s/it]
+当前学习率: 0.000010
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/latest_checkpoint.pth (169.0MB)
+✓ 检查点保存成功: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible/checkpoint_epoch_5.pth (56.4MB)
+Epoch [5/5],Train Loss: 5.3788
+
+训练完成！最佳模型来自 Epoch 0
+检查点保存路径: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible
+
+🎉 训练完成！
+📊 最佳模型: Epoch 0, Loss: 0.0000
+💾 模型检查点保存在: /data/1024whs_checkpoint/Degradclean/Train_Degradclean_LLVIP_visible

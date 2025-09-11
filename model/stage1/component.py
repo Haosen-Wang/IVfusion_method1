@@ -135,7 +135,7 @@ class VI_Z(nn.Module):
         self.mu,self.sigma2=self.get_mu_sigma2(z)
         #epsil = torch.normal(mean=0.025, std=0.01, size=self.sigma2.shape, 
                       #device=self.sigma2.device, dtype=self.sigma2.dtype)
-        self.out=self.mu+self.alpha*torch.sqrt(torch.abs(self.sigma2))
+        self.out=self.mu+self.alpha*torch.abs(self.sigma2)
         return self.out,self.mu,self.sigma2
 
         

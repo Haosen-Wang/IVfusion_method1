@@ -1,0 +1,13 @@
+{"time":"2025-09-10T21:57:17.148698281+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-10T21:57:18.656852125+08:00","level":"INFO","msg":"stream: created new stream","id":"qmrnnyhu"}
+{"time":"2025-09-10T21:57:18.656937749+08:00","level":"INFO","msg":"stream: started","id":"qmrnnyhu"}
+{"time":"2025-09-10T21:57:18.657044312+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"qmrnnyhu"}
+{"time":"2025-09-10T21:57:18.657132996+08:00","level":"INFO","msg":"handler: started","stream_id":"qmrnnyhu"}
+{"time":"2025-09-10T21:57:18.65730795+08:00","level":"INFO","msg":"sender: started","stream_id":"qmrnnyhu"}
+{"time":"2025-09-10T22:08:26.962855683+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/3020233040-tianjin-university/Train_Degradclean_DroneRGBT_infrared/qmrnnyhu/file_stream\": EOF"}
+{"time":"2025-09-10T22:21:00.461526641+08:00","level":"INFO","msg":"stream: closing","id":"qmrnnyhu"}
+{"time":"2025-09-10T22:21:02.37731794+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-10T22:21:04.602975993+08:00","level":"INFO","msg":"handler: closed","stream_id":"qmrnnyhu"}
+{"time":"2025-09-10T22:21:04.603101167+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"qmrnnyhu"}
+{"time":"2025-09-10T22:21:04.603124457+08:00","level":"INFO","msg":"sender: closed","stream_id":"qmrnnyhu"}
+{"time":"2025-09-10T22:21:04.603283771+08:00","level":"INFO","msg":"stream: closed","id":"qmrnnyhu"}

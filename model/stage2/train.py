@@ -181,7 +181,7 @@ def train_epoch_model(model, train_loader, criterion, optimizer, device_1, devic
                 raise e
                 
     return epoch_loss
-def train_model(model, train_loader, criterion, optimizer, device_1, device_2, device_3, project_name, num_epochs=10, val_loader=None, checkpoint_dir="./checkpoints"):
+def train_model(model, train_loader, criterion, optimizer, device_1, device_2, device_3,best_train_loss, project_name, num_epochs=10, val_loader=None, checkpoint_dir="./checkpoints"):
     """
     训练函数，集成wandb监控和检查点保存
     
@@ -354,11 +354,18 @@ def resume_training(model, optimizer, checkpoint_dir="/data/1024whs_checkpoint/i
     """
     latest_checkpoint = os.path.join(checkpoint_dir, 'latest_checkpoint.pth')
     if os.path.exists(latest_checkpoint):
-        epoch, _, _ = load_checkpoint(model, optimizer, latest_checkpoint)
-        return epoch
+        print("🔄 发现检查点，恢复训练...")
+        # 内存高效加载
+        epoch, train_loss, _ = load_checkpoint(model, optimizer, latest_checkpoint)
+        
+        # 清理缓存
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        
+        return 0,train_loss  # 下一个epoch
     else:
-        print("未找到最新检查点，从头开始训练")
-        return 0
+        print("🆕 未找到最新检查点，从头开始训练")
+        return 0,0.0
 
 
 def check_data(i_dataset,v_dataset):
@@ -404,7 +411,8 @@ def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device
     transform_i = transforms.Compose([
         transforms.Resize((240,240)),  # 调整图像大小
         transforms.ToTensor(),          # 转换为张量 [0,1]
-        transforms.Normalize(mean=[0.253], std=[0.191]) 
+        transforms.Normalize(mean=[0.495], std=[0.19])#RGBT
+        #transforms.Normalize(mean=[0.253], std=[0.191]) #LLVIP
     ])
     
     # 为可见光图像（3通道）创建变换
@@ -413,7 +421,8 @@ def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device
     transform_v = transforms.Compose([
         transforms.Resize((240,240)),  # 调整图像大小
         transforms.ToTensor(),          # 转换为张量 [0,1]
-        transforms.Normalize(mean=[0.188, 0.186, 0.154], std=[0.183, 0.190, 0.197]) 
+        transforms.Normalize(mean=[0.349, 0.335, 0.353], std=[0.219, 0.205, 0.218])#RGBT
+        #transforms.Normalize(mean=[0.188, 0.186, 0.154], std=[0.183, 0.190, 0.197]) #LLVIP
     ])
     
     # 选项2: ImageNet预训练标准化
@@ -478,11 +487,15 @@ def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device
     
     # 检查点目录
     checkpoint_dir = f"/data/1024whs_checkpoint/iv_fusion/{project_name}"
-    
-    # 是否从检查点恢复训练
     start_epoch = 0
     if resume_from_checkpoint:
-        start_epoch = resume_training(model, optimizer, checkpoint_dir)
+        start_epoch,best_train_loss = resume_training(
+            model, optimizer, checkpoint_dir,
+        )
+    else:
+        best_train_loss = float('inf')
+        print("🆕 从头开始训练")
+    # 是否从检查点恢复训练
     
     # 调整训练轮数
     remaining_epochs = max(0, num_epochs - start_epoch)
@@ -501,6 +514,7 @@ def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device
         device_1=device_1, 
         device_2=device_2, 
         device_3=device_3, 
+        best_train_loss=best_train_loss,
         project_name=project_name,
         num_epochs=remaining_epochs, 
         val_loader=None,  # 如果有验证数据，在这里传入
@@ -520,9 +534,9 @@ def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device
 
 if __name__ == "__main__":
     config_dic = {
-        "i_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/LLVIP/infrared",
-        "v_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/LLVIP/visible",
-        "project_name": "Train_IVfusion_LLVIP",
+        "i_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/DroneRGBT/infrared",
+        "v_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/DroneRGBT/visible",
+        "project_name": "Train_IVfusion_DroneRGBT",
         "batch_size": 2,  # 减小批次大小从2到1
         "num_epochs": 5,
         "device_1": "cuda:0", 

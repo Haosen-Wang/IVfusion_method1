@@ -508,18 +508,20 @@ def check_data(d_dataset,c_dataset):
 
      print(f"最终配对数量: 退化图像{len(d_dataset)}, 干净图像{len(c_dataset)}")
 
-def main(d_data_dir, c_data_dir, project_name, batch_size, num_epochs=10, device_1="cuda:0", device_2="cuda:1", device_3="cuda:2", resume_from_checkpoint=True,i_block_num=2,v_block_num=2,i_expert_num=3,v_expert_num=3,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=3,mode="L", memory_efficient=True, load_optimizer_state=True, compress_checkpoints=True, save_optimizer_in_epoch_checkpoints=False):
+def main(d_data_dir, c_data_dir, project_name, batch_size, num_epochs=10, device_1="cuda:0", device_2="cuda:1", device_3="cuda:2", resume_from_checkpoint=True,i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2,mode="L", memory_efficient=True, load_optimizer_state=True, compress_checkpoints=True, save_optimizer_in_epoch_checkpoints=False):
     if mode=="L":
         transform = transforms.Compose([
             transforms.Resize((240,240)),  # 调整图像大小
             transforms.ToTensor(),          # 转换为张量 [0,1]
-            transforms.Normalize(mean=[0.495], std=[0.19])#DRGBT  # 单通道标准化
+            transforms.Normalize(mean=[0.253], std=[0.191]) #LLVIP
+            #transforms.Normalize(mean=[0.495], std=[0.19])#DRGBT  # 单通道标准化
         ])
     if mode=="RGB":
         transform = transforms.Compose([
             transforms.Resize((240,240)),  # 调整图像大小
             transforms.ToTensor(),
-            transforms.Normalize(mean=[0.349, 0.335, 0.353], std=[0.219, 0.205, 0.218])#DRGBT          # 转换为张量 [0,1]
+            transforms.Normalize(mean=[0.188, 0.186, 0.154], std=[0.183, 0.190, 0.197]) #LLVIP
+            #transforms.Normalize(mean=[0.349, 0.335, 0.353], std=[0.219, 0.205, 0.218])#DRGBT          # 转换为张量 [0,1]
             #transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])  # RGB标准化
         ])
     
@@ -544,7 +546,7 @@ def main(d_data_dir, c_data_dir, project_name, batch_size, num_epochs=10, device
     torch.cuda.empty_cache()  # 清理GPU缓存
     
     # 初始化模型、损失函数、优化器
-    model = Degrad_restore_model(i_block_num=2,v_block_num=2,i_expert_num=3,v_expert_num=3,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=3,mode=mode)  # 你的模型
+    model = Degrad_restore_model(i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2,mode=mode)  # 你的模型
     
     criterion = Loss()  # 你的损失函数
     optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)  # 降低学习率

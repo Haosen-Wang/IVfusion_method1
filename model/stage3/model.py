@@ -71,7 +71,7 @@ class DIV_fusion_model(nn.Module):
 if __name__ == "__main__":
     model=DIV_fusion_model(task="dv_i")
     checkpoint_iv = torch.load("/data/1024whs_checkpoint/iv_fusion/Train_IVfusion_DroneVehicle/best_model.pth")
-    checkpoint_dv = torch.load("/data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_visible/latest_checkpoint.pth")
+    checkpoint_dv = torch.load("/data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_visible/best_model.pth")
     model.vdr.load_state_dict(checkpoint_dv['model_state_dict'])
     model.civ.load_state_dict(checkpoint_iv['model_state_dict'])
     print(model)
