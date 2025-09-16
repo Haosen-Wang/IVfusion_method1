@@ -27,11 +27,15 @@ class Degrad_restore_model(nn.Module):
         super(Degrad_restore_model,self).__init__()
         self.noise_encoder_decoder=stage1_Noise_encoder_decoder(block_num=i_block_num,expert_num=i_expert_num,topk_expert=i_topk_expert,alpha=i_alpha,mode=mode)
         self.fusion_net=stage1_Fusion_Net(block_num=f_block_num,mode=mode)
-    def forward(self,image):
+    def forward(self,image,device_3):
+        self.noise_encoder_decoder = self.noise_encoder_decoder.to(device_3)
+        image = image.to(device_3)
         with torch.no_grad():
             n,_,_ = self.noise_encoder_decoder(image)
             Ic_image = image-n
             fused_input = Ic_image
+            fused_input = fused_input.to(device_3)
+        self.fusion_net = self.fusion_net.to(device_3)
         out= self.fusion_net(fused_input)
         return out
 
@@ -41,13 +45,19 @@ class IV_fusion_model(nn.Module):
         self.I_encoder_decoder=stage2_I_encoder_decoder(block_num=i_block_num,expert_num=i_expert_num,topk_expert=i_topk_expert,alpha=i_alpha)
         self.V_encoder_decoder=stage2_V_encoder_decoder(block_num=v_block_num,expert_num=v_expert_num,topk_expert=v_topk_expert,alpha=v_alpha)
         self.fusion_net=stage2_Fusion_Net(block_num=f_block_num)
-    def forward(self,i,v):
-        with torch.no_grad():
-            l,_,_= self.I_encoder_decoder(i)
-            g,_,_ = self.V_encoder_decoder(v)
-            Ic_i = i + l
-            Ic_v = v + g
-            fused_input = 0.5*Ic_i+0.5*Ic_v
+    def forward(self,i,v,device_1, device_2,device_3):
+        self.I_encoder_decoder = self.I_encoder_decoder.to(device_1)
+        self.V_encoder_decoder = self.V_encoder_decoder.to(device_2)
+        i = i.to(device_1)
+        v = v.to(device_2)
+        l,_,_= self.I_encoder_decoder(i)
+        g,_,_ = self.V_encoder_decoder(v)
+        Ic_i = i +0.1*l
+        Ic_v = v +0.1*g
+        Ic_i = Ic_i.to(device_3)
+        Ic_v = Ic_v.to(device_3)
+        self.fusion_net = self.fusion_net.to(device_3)
+        fused_input = 0.5*Ic_i+0.5*Ic_v
         fusion = self.fusion_net(fused_input)
         return fusion
 
@@ -56,17 +66,22 @@ class DIV_fusion_model(nn.Module):
         super(DIV_fusion_model,self).__init__()
         self.task=task
         if task=="dv_i":
-            self.idr=Degrad_restore_model(i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2,mode="L")
-            self.civ=IV_fusion_model(i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2)
-        if task=="dv_i":
             self.vdr=Degrad_restore_model(i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2,mode="RGB")
             self.civ=IV_fusion_model(i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2)
-    def forward(self,di,dv):
+        elif task=="di_v":
+            self.idr=Degrad_restore_model(i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2,mode="L")
+            self.civ=IV_fusion_model(i_block_num=2,v_block_num=2,i_expert_num=4,v_expert_num=4,i_topk_expert=2,v_topk_expert=2,i_alpha=1.0,v_alpha=1.0,f_block_num=2)
+    def forward(self,di,dv,device_1, device_2,device_3):
         if self.task=="dv_i":
-            clean_v= self.vdr(dv)
+            clean_v= self.vdr(dv,device_3)
             clean_i= di
-            clean_fusion= self.civ(clean_i,clean_v)
-        return clean_fusion
+            clean_fusion= self.civ(clean_i,clean_v,device_1, device_2,device_3)
+            return clean_fusion, clean_v
+        if self.task=="di_v":
+            clean_i= self.idr(di,device_3)
+            clean_v= dv
+            clean_fusion= self.civ(clean_i,clean_v,device_1, device_2,device_3)
+            return clean_fusion, clean_i
 
 if __name__ == "__main__":
     model=DIV_fusion_model(task="dv_i")

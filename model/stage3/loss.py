@@ -5,29 +5,72 @@ import numpy as np
 import torch.nn as nn
 import torch.nn.functional as F
 
-class FusionLoss(nn.Module):
-    def __init__(self, pixel_weight=1.0, gradient_weight=1.0, ssim_weight=1.0, perceptual_weight=1.0):
-        super(FusionLoss, self).__init__()
+class FusionLoss_F(nn.Module):
+    def __init__(self, pixel_weight=1.0, gradient_weight=1.0, ssim_weight=1.0, 
+                 l1_reg_weight=0.0, l2_reg_weight=0.0, learnable_reg=True):
+        super(FusionLoss_F, self).__init__()
         self.pixel_weight = pixel_weight
         self.gradient_weight = gradient_weight
         self.ssim_weight = ssim_weight
-        self.perceptual_weight = perceptual_weight
+        
+        # 可学习的正则化权重
+        if learnable_reg:
+            # 使用Parameter将正则化权重变为可训练参数
+            # 初始化为给定值，并使用log空间确保正值
+            self.log_l1_reg_weight = nn.Parameter(torch.log(torch.tensor(l1_reg_weight + 1e-8)))
+            self.log_l2_reg_weight = nn.Parameter(torch.log(torch.tensor(l2_reg_weight + 1e-8)))
+            self.learnable_reg = True
+        else:
+            # 固定的正则化权重
+            self.register_buffer('l1_reg_weight', torch.tensor(l1_reg_weight))
+            self.register_buffer('l2_reg_weight', torch.tensor(l2_reg_weight))
+            self.learnable_reg = False
         
         # VGG16 for perceptual loss
-        vgg = vgg16(pretrained=True)
-        self.vgg_features = nn.Sequential(*list(vgg.features)[:16]).eval()
-        for param in self.vgg_features.parameters():
-            param.requires_grad = False
+        #vgg = vgg16(pretrained=True)
+        #self.vgg_features = nn.Sequential(*list(vgg.features)[:16]).eval()
+        #for param in self.vgg_features.parameters():
+            #param.requires_grad = False
+    
+    def get_reg_weights(self):
+        """获取当前的正则化权重"""
+        if self.learnable_reg:
+            # 使用exp确保权重为正值
+            l1_weight = torch.exp(self.log_l1_reg_weight)
+            l2_weight = torch.exp(self.log_l2_reg_weight)
+        else:
+            l1_weight = self.l1_reg_weight
+            l2_weight = self.l2_reg_weight
+        return l1_weight, l2_weight
     
     def pixel_loss(self, fused, visible, infrared):
-        """Pixel-level L1 loss"""
+        """Pixel-level L1 loss with learnable regularization"""
         infrared=infrared.expand_as(fused)
         visible=visible.expand_as(fused)
-        loss = 0.5*(F.l1_loss(fused, visible) + F.l1_loss(fused, infrared))
-        return loss 
+        
+        # 基础L1损失
+        base_loss = 0.5*(F.l1_loss(fused, visible) + F.l1_loss(fused, infrared))
+        
+        # 获取当前正则化权重
+        l1_reg_weight, l2_reg_weight = self.get_reg_weights()
+        
+        # 添加正则化项
+        regularization = 0.0
+        
+        # L1正则化 (促进稀疏性)
+        if l1_reg_weight > 1e-8:
+            l1_reg = l1_reg_weight * torch.sum(torch.abs(fused))
+            regularization += l1_reg
+        
+        # L2正则化 (防止过拟合)
+        if l2_reg_weight > 1e-8:
+            l2_reg = l2_reg_weight * torch.sum(fused ** 2)
+            regularization += l2_reg
+        
+        return base_loss + regularization 
     
     def gradient_loss(self, fused, visible, infrared):
-        """Gradient-level loss using Sobel operator"""
+        """Gradient-level loss using Sobel operator with regularization"""
         def sobel_gradient(img):
             # Get number of channels
             channels = img.size(1)
@@ -56,8 +99,27 @@ class FusionLoss(nn.Module):
         grad_infrared = sobel_gradient(infrared)
         grad_infrared = grad_infrared.expand_as(grad_fused)
         grad_visible = grad_visible.expand_as(grad_fused)
-        loss = 0.5*(F.l1_loss(grad_fused, grad_visible) + F.l1_loss(grad_fused, grad_infrared))
-        return loss
+        
+        # 基础梯度损失
+        base_loss = 0.5*(F.l1_loss(grad_fused, grad_visible) + F.l1_loss(grad_fused, grad_infrared))
+        
+        # 获取当前正则化权重
+        l1_reg_weight, l2_reg_weight = self.get_reg_weights()
+        
+        # 添加梯度正则化项
+        regularization = 0.0
+        
+        # 梯度L1正则化 (促进梯度稀疏性，减少噪声)
+        if l1_reg_weight > 1e-8:
+            grad_l1_reg = l1_reg_weight * 0.1 * torch.sum(torch.abs(grad_fused))
+            regularization += grad_l1_reg
+        
+        # 梯度L2正则化 (平滑梯度)
+        if l2_reg_weight > 1e-8:
+            grad_l2_reg = l2_reg_weight * 0.1 * torch.sum(grad_fused ** 2)
+            regularization += grad_l2_reg
+        
+        return base_loss + regularization
     
     def ssim_loss(self, fused, visible, infrared):
         """Structural Similarity Index loss with numerical stability"""
@@ -192,14 +254,12 @@ class FusionLoss(nn.Module):
             pixel_loss = self.pixel_loss(fused, visible, infrared)
             gradient_loss = self.gradient_loss(fused, visible, infrared)
             ssim_loss = self.ssim_loss(fused, visible, infrared)
-            perceptual_loss = self.perceptual_loss(fused, visible, infrared)
             
             # 检查每项损失
             losses = {
                 'pixel_loss': pixel_loss,
                 'gradient_loss': gradient_loss, 
                 'ssim_loss': ssim_loss,
-                'perceptual_loss': perceptual_loss
             }
             
             for loss_name, loss_val in losses.items():
@@ -209,9 +269,8 @@ class FusionLoss(nn.Module):
             
             # 计算总损失，使用较小的权重避免溢出
             total_loss = (self.pixel_weight * pixel_loss + 
-                         self.gradient_weight * gradient_loss +
-                         self.ssim_weight * ssim_loss +
-                         self.perceptual_weight * perceptual_loss)
+                         self.gradient_weight * gradient_loss+
+                         self.ssim_weight * ssim_loss)
             #total_loss = (self.pixel_weight * pixel_loss + 
                          #self.gradient_weight * gradient_loss)
             
@@ -222,9 +281,9 @@ class FusionLoss(nn.Module):
 
             return {
                 'total_loss_f': total_loss,
-                'pixel_loss': pixel_loss,
-                'gradient_loss': gradient_loss,
-                'perceptual_loss': perceptual_loss
+                'pixel_loss_f': pixel_loss,
+                'gradient_loss_f': gradient_loss,
+                #'ssim_loss_f': ssim_loss
             }
             
         except Exception as e:
@@ -238,120 +297,76 @@ class FusionLoss(nn.Module):
             'total_loss_f': safe_loss,
             'pixel_loss': safe_loss * 0.1,
             'gradient_loss': safe_loss * 0.1, 
-            'perceptual_loss': safe_loss * 0.1
+            'ssim_loss_f': safe_loss * 0.1
         }
+class FusionLoss_N(nn.Module):
+    def __init__(self, pixel_weight=1.0, gradient_weight=1.0, ssim_weight=1.0,
+                 l1_reg_weight=0.0, l2_reg_weight=0.0, learnable_reg=True):
+        super(FusionLoss_N, self).__init__()
+        self.pixel_weight = pixel_weight
+        self.gradient_weight = gradient_weight
+        self.ssim_weight = ssim_weight
+        
+        # 可学习的正则化权重
+        if learnable_reg:
+            # 使用Parameter将正则化权重变为可训练参数
+            self.log_l1_reg_weight = nn.Parameter(torch.log(torch.tensor(l1_reg_weight + 1e-8)))
+            self.log_l2_reg_weight = nn.Parameter(torch.log(torch.tensor(l2_reg_weight + 1e-8)))
+            self.learnable_reg = True
+        else:
+            # 固定的正则化权重
+            self.register_buffer('l1_reg_weight', torch.tensor(l1_reg_weight))
+            self.register_buffer('l2_reg_weight', torch.tensor(l2_reg_weight))
+            self.learnable_reg = False
     
-class VI_Loss(nn.Module):
-    def __init__(self, rec_loss_weight=1.0,KL_loss_weight=0.01):
-        super(VI_Loss, self).__init__()
-        self.rec_loss_weight = rec_loss_weight
-        self.KL_loss_weight = KL_loss_weight
-    def forward(self, i, v, g, l, mu_i, sigma2_i, mu_v, sigma2_v):
-        """VI损失前向传播，包含完整的数值稳定性检查"""
-        try:
-            # 输入检查
-            inputs = [i, v, g, l, mu_i, sigma2_i, mu_v, sigma2_v]
-            input_names = ['i', 'v', 'g', 'l', 'mu_i', 'sigma2_i', 'mu_v', 'sigma2_v']
-            
-            for inp, name in zip(inputs, input_names):
-                if torch.isnan(inp).any():
-                    print(f"⚠️ VI_Loss输入 {name} 包含NaN值")
-                    return self._safe_vi_loss_dict(i.device)
-                if torch.isinf(inp).any():
-                    print(f"⚠️ VI_Loss输入 {name} 包含Inf值")
-                    return self._safe_vi_loss_dict(i.device)
+    def get_reg_weights(self):
+        """获取当前的正则化权重"""
+        if self.learnable_reg:
+            # 使用exp确保权重为正值
+            l1_weight = torch.exp(self.log_l1_reg_weight)
+            l2_weight = torch.exp(self.log_l2_reg_weight)
+        else:
+            l1_weight = self.l1_reg_weight
+            l2_weight = self.l2_reg_weight
+        return l1_weight, l2_weight
+        
+        # VGG16 for perceptual loss
+        #try:
+           # from torchvision.models import VGG16_Weights
+            #vgg = vgg16(weights=VGG16_Weights.IMAGENET1K_V1)
+        #except ImportError:
+            # 兼容旧版本
+            #vgg = vgg16(pretrained=True)
+        #self.vgg_features = nn.Sequential(*list(vgg.features)[:16]).eval()
+        #for param in self.vgg_features.parameters():
+            #param.requires_grad = False
     
-            
-            # 计算目标值
-            l_tru = torch.max(i, v)
-            l = l.expand_as(l_tru)
-            
-            # 重建损失 - 添加数值稳定性检查
-            rec_l = F.mse_loss(l, l_tru)
-            if torch.isnan(rec_l) or torch.isinf(rec_l):
-                print(f"⚠️ rec_l 出现NaN/Inf")
-                rec_l = torch.tensor(1.0, device=i.device, requires_grad=True)
-            
-            # 梯度损失计算
-            try:
-                grad_visible = self.sobel_gradient(v)
-                grad_infrared = self.sobel_gradient(i)
-                g_tru = torch.max(grad_visible, grad_infrared)
-                g = g.expand_as(g_tru)
-                rec_g = F.mse_loss(g, g_tru)
-                
-                if torch.isnan(rec_g) or torch.isinf(rec_g):
-                    print(f"⚠️ rec_g 出现NaN/Inf")
-                    rec_g = torch.tensor(1.0, device=i.device, requires_grad=True)
-                    
-            except Exception as e:
-                print(f"⚠️ 梯度损失计算出错: {e}")
-                rec_g = torch.tensor(1.0, device=i.device, requires_grad=True)
-            
-            # KL散度损失 - 大幅提高数值稳定性
-            sigma2_i_safe = torch.clamp(sigma2_i, min=1e-6, max=100)  # 限制上界
-            sigma2_v_safe = torch.clamp(sigma2_v, min=1e-6, max=100)
-            
-            # 限制mu的范围，避免平方后溢出
-            mu_i_safe = torch.clamp(mu_i, -5, 5)
-            mu_v_safe = torch.clamp(mu_v, -5, 5)
-            
-            # 安全的KL计算
-            try:
-                log_sigma2_i = torch.log(sigma2_i_safe)
-                log_sigma2_v = torch.log(sigma2_v_safe)
-                
-                # 检查对数是否产生NaN
-                if torch.isnan(log_sigma2_i).any() or torch.isinf(log_sigma2_i).any():
-                    print(f"⚠️ log(sigma2_i) 出现问题")
-                    kl_loss_i = torch.tensor(0.1, device=i.device, requires_grad=True)
-                else:
-                    kl_loss_i = -0.5 * torch.mean(1 + log_sigma2_i - mu_i_safe.pow(2) - sigma2_i_safe)
-                    kl_loss_i = torch.clamp(kl_loss_i, -10, 10)  # 限制KL损失范围
-                
-                if torch.isnan(log_sigma2_v).any() or torch.isinf(log_sigma2_v).any():
-                    print(f"⚠️ log(sigma2_v) 出现问题")
-                    kl_loss_g = torch.tensor(0.1, device=i.device, requires_grad=True)
-                else:
-                    kl_loss_g = -0.5 * torch.mean(1 + log_sigma2_v - mu_v_safe.pow(2) - sigma2_v_safe)
-                    kl_loss_g = torch.clamp(kl_loss_g, -10, 10)  # 限制KL损失范围
-                    
-            except Exception as e:
-                print(f"⚠️ KL损失计算出错: {e}")
-                kl_loss_i = torch.tensor(0.1, device=i.device, requires_grad=True)
-                kl_loss_g = torch.tensor(0.1, device=i.device, requires_grad=True)
-
-            #total_loss = 0.5 * (self.rec_loss_weight * rec_l + self.KL_loss_weight * kl_loss_i + self.rec_loss_weight * rec_g+self.KL_loss_weight * kl_loss_g)
-            total_loss = 0.5 * (self.rec_loss_weight * rec_l + self.rec_loss_weight * rec_g)
-            # 最终检查
-            if torch.isnan(total_loss) or torch.isinf(total_loss):
-                print(f"⚠️ VI总损失出现NaN/Inf: {total_loss}")
-                return self._safe_vi_loss_dict(i.device)
-            
-            return {
-                'total_loss_vi': total_loss,
-                'rec_i': rec_l,
-                'rec_g': rec_g,
-                'kl_loss_i': kl_loss_i,
-                'kl_loss_g': kl_loss_g
-            }
-            
-        except Exception as e:
-            print(f"⚠️ VI_Loss计算出错: {e}")
-            return self._safe_vi_loss_dict(i.device)
+    def pixel_loss(self, clean_pre, clean):
+        """Pixel-level L1 loss with learnable regularization"""
+        # 基础L1损失
+        base_loss = F.l1_loss(clean_pre, clean)
+        
+        # 获取当前正则化权重
+        l1_reg_weight, l2_reg_weight = self.get_reg_weights()
+        
+        # 添加正则化项
+        regularization = 0.0
+        
+        # L1正则化 (促进稀疏性)
+        if l1_reg_weight > 1e-8:
+            l1_reg = l1_reg_weight * torch.sum(torch.abs(clean_pre))
+            regularization += l1_reg
+        
+        # L2正则化 (防止过拟合)
+        if l2_reg_weight > 1e-8:
+            l2_reg = l2_reg_weight * torch.sum(clean_pre ** 2)
+            regularization += l2_reg
+        
+        return base_loss + regularization 
     
-    def _safe_vi_loss_dict(self, device):
-        """返回安全的VI损失字典"""
-        safe_loss = torch.tensor(1.0, device=device, requires_grad=True)
-        return {
-            'total_loss_vi': safe_loss,
-            'rec_i': safe_loss * 0.5,
-            'rec_g': safe_loss * 0.5,
-            'kl_loss_i': safe_loss * 0.1,
-            'kl_loss_g': safe_loss * 0.1
-        }
-    
-    def sobel_gradient(self,img):
+    def gradient_loss(self, clean_pre, clean):
+        """Gradient-level loss using Sobel operator with regularization"""
+        def sobel_gradient(img):
             # Get number of channels
             channels = img.size(1)
             
@@ -373,48 +388,125 @@ class VI_Loss(nn.Module):
             grad_magnitude_sq = grad_x**2 + grad_y**2
             grad_magnitude_sq = torch.clamp(grad_magnitude_sq, min=0.0)
             return torch.sqrt(grad_magnitude_sq)
-    def calculate_cross_entropy(self,img1, img2):#self,true,pred
-                # Convert to numpy and flatten
-                img1_np = img1.detach().cpu().numpy()
-                img2_np = img2.detach().cpu().numpy()
-                img1_flat = img1_np.flatten()
-                img2_flat = img2_np.flatten()
-                
-                # Calculate histograms
-                hist1, _ = np.histogram(img1_flat, bins=256, range=(0, 1))
-                hist2, _ = np.histogram(img2_flat, bins=256, range=(0, 1))
-                hist1 = hist1 + 1e-7  # Add small value to avoid log(0)
-                hist2 = hist2 + 1e-7
-                
-                # Normalize to get probabilities
-                prob1 = hist1 / hist1.sum()
-                prob2 = hist2 / hist2.sum()
-                
-                # Calculate cross entropy: H(p,q) = -sum(p(x) * log(q(x)))
-                cross_entropy = -np.sum(prob1 * np.log2(prob2 + 1e-7))
-                return cross_entropy
+        
+        grad_clean_pre = sobel_gradient(clean_pre)
+        grad_clean = sobel_gradient(clean)
+        
+        # 基础梯度损失
+        base_loss = F.l1_loss(grad_clean_pre, grad_clean)
+        
+        # 获取当前正则化权重
+        l1_reg_weight, l2_reg_weight = self.get_reg_weights()
+        
+        # 添加梯度正则化项
+        regularization = 0.0
+        
+        # 梯度L1正则化 (促进梯度稀疏性)
+        if l1_reg_weight > 1e-8:
+            grad_l1_reg = l1_reg_weight * 0.1 * torch.sum(torch.abs(grad_clean_pre))
+            regularization += grad_l1_reg
+        
+        # 梯度L2正则化 (平滑梯度)
+        if l2_reg_weight > 1e-8:
+            grad_l2_reg = l2_reg_weight * 0.1 * torch.sum(grad_clean_pre ** 2)
+            regularization += grad_l2_reg
+        
+        return base_loss + regularization
+
+    def ssim_loss(self, clean_pre, clean):
+        """Structural Similarity Index loss"""
+        def ssim(img1, img2, window_size=11, window_sigma=1.5):
+            C1 = 0.01**2
+            C2 = 0.03**2
+            
+            mu1 = F.avg_pool2d(img1, window_size, stride=1, padding=window_size//2)
+            mu2 = F.avg_pool2d(img2, window_size, stride=1, padding=window_size//2)
+            
+            mu1_sq = mu1.pow(2)
+            mu2_sq = mu2.pow(2)
+            mu1_mu2 = mu1 * mu2
+            
+            sigma1_sq = F.avg_pool2d(img1 * img1, window_size, stride=1, padding=window_size//2) - mu1_sq
+            sigma2_sq = F.avg_pool2d(img2 * img2, window_size, stride=1, padding=window_size//2) - mu2_sq
+            ssim_map = ((2 * mu1_mu2 + C1) * (2 * sigma1_sq + C2)) / ((mu1_sq + mu2_sq + C1) * (sigma1_sq + sigma2_sq + C2))
+            result = ssim_map.mean()
+            return result if not torch.isnan(result) else torch.zeros_like(result, requires_grad=True)
+        ssim_dc = ssim(clean_pre, clean)
+        loss = 1 - ssim_dc
+        return loss
+
+    def perceptual_loss(self, clean_pre, clean):
+        """Perceptual loss using VGG16 features"""
+        # Convert to 3-channel if grayscale
+        if clean_pre.size(1) == 1:
+            clean_pre = clean_pre.repeat(1, 3, 1, 1)
+        if clean.size(1) == 1:
+            clean = clean.repeat(1, 3, 1, 1)
+
+        degrad_features = self.vgg_features(clean_pre)
+        clean_features = self.vgg_features(clean)
+
+        loss = F.l1_loss(degrad_features, clean_features)
+        return loss
+    def forward(self, clean_pre, clean):
+        pixel_loss = self.pixel_loss(clean_pre, clean)
+        gradient_loss = self.gradient_loss(clean_pre, clean)
+        #ssim_loss = self.ssim_loss(clean_pre, clean)
+
+        total_loss = (self.pixel_weight * pixel_loss +
+                     self.gradient_weight * gradient_loss)
+                     #self.ssim_weight * ssim_loss)
+
+        return {
+            'total_loss_d': total_loss,
+            'pixel_loss_d': pixel_loss,
+            'gradient_loss_d': gradient_loss,
+            #'ssim_loss_d': ssim_loss
+        }
 class Loss(nn.Module):
-     def __init__(self, f_weight=1.0,vi_weight=1.0,pixel_weight=1.0, gradient_weight=1.0, ssim_weight=1.0, perceptual_weight=1.0,rec_loss_weight=1.0,KL_loss_weight=0.01):
+     def __init__(self, f_weight=1.0, vi_weight=1.0, pixel_weight=1.0, gradient_weight=1.0, 
+                  ssim_weight=1.0, rec_loss_weight=1.0, KL_loss_weight=0.01,
+                  l1_reg_weight=0.0, l2_reg_weight=0.0, learnable_reg=False):
           super().__init__()
-          self.fusion_loss=FusionLoss(pixel_weight, gradient_weight, ssim_weight, perceptual_weight)
-          self.vi_loss=VI_Loss(rec_loss_weight,KL_loss_weight)
-          self.f_weight=f_weight
-          self.vi_weight=vi_weight
-     def forward(self, f,i, v, g, l, mu_l, sigma2_l, mu_g, sigma2_g):
-         fusion_losses = self.fusion_loss(f, v, i)
-         vi_losses = self.vi_loss(i, v, g, l, mu_l, sigma2_l, mu_g, sigma2_g)
-         total_loss=self.f_weight*fusion_losses['total_loss_f']+self.vi_weight*vi_losses['total_loss_vi']
-         return {**fusion_losses, **vi_losses, 'total_loss': total_loss}
+          self.f_loss = FusionLoss_F(pixel_weight, gradient_weight, ssim_weight, 
+                                   l1_reg_weight, l2_reg_weight, learnable_reg)
+          self.d_loss = FusionLoss_N(pixel_weight, gradient_weight, ssim_weight,
+                                   l1_reg_weight, l2_reg_weight, learnable_reg)
+          self.f_weight = f_weight
+          self.d_weight = vi_weight
+          self.learnable_reg = learnable_reg
+     
+     def get_regularization_weights(self):
+         """获取当前的正则化权重（用于监控）"""
+         f_l1, f_l2 = self.f_loss.get_reg_weights()
+         d_l1, d_l2 = self.d_loss.get_reg_weights()
+         return {
+             'fusion_l1_reg': f_l1.item() if hasattr(f_l1, 'item') else float(f_l1),
+             'fusion_l2_reg': f_l2.item() if hasattr(f_l2, 'item') else float(f_l2),
+             'degrad_l1_reg': d_l1.item() if hasattr(d_l1, 'item') else float(d_l1),
+             'degrad_l2_reg': d_l2.item() if hasattr(d_l2, 'item') else float(d_l2)
+         }
+     def forward(self,task,f,v,i,c):
+         f_losses = self.f_loss(f, v, i)
+         if task=="dv_i":
+             d_losses = self.d_loss(c, v)
+         if task=="di_v":
+             d_losses = self.d_loss(c, i)
+         total_loss=5*self.f_weight*f_losses['total_loss_f']+self.d_weight*d_losses['total_loss_d']
+         
+         # 如果使用可学习正则化，添加正则化权重信息到输出
+         result = {**f_losses, **d_losses, 'total_loss': total_loss}
+         if self.learnable_reg:
+             reg_weights = self.get_regularization_weights()
+             result.update(reg_weights)
+         
+         return result
 if __name__=="__main__":
     # 测试代码
    fused=torch.rand(size=(2, 3, 224, 224))
    visible=torch.rand(size=(2, 3, 224, 224))
    infrared=torch.rand(size=(2, 1, 224, 224))
-   g=torch.rand(size=(2, 3, 224, 224))
-   l=torch.rand(size=(2, 1, 224, 224))
-   mu=torch.rand(size=(2, 3, 224, 224))
-   sigma=torch.rand(size=(2, 3, 224, 224))
    loss_fn=Loss(rec_loss_weight=1.0,KL_loss_weight=0.01)
-   losses=loss_fn(fused,visible, infrared, g, l, mu, sigma)
+   losses=loss_fn(fused,visible, infrared)
    print(losses)
 

@@ -1,6 +1,6 @@
 data:
   d_data_dir: "/data/1024whs_data/DeMMI-RF/Train/degrad/noise50/MSRS"
-  c_data_dir: "/data/1024whs_data/DeMMI-RF/Train/infrared/noise50/MSRS"
+  c_data_dir: "/data/1024whs_data/DeMMI-RF/Train/visible/noise50/MSRS"
   mode: "RGB"
 
 training:

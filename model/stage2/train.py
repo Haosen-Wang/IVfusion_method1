@@ -410,8 +410,12 @@ def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device
     # 为红外图像（单通道）创建变换
     transform_i = transforms.Compose([
         transforms.Resize((240,240)),  # 调整图像大小
-        transforms.ToTensor(),          # 转换为张量 [0,1]
-        transforms.Normalize(mean=[0.495], std=[0.19])#RGBT
+        transforms.ToTensor(),                  # 转换为张量 [0,1]
+        transforms.Normalize(mean=[0.3011], std=[0.1835])#FMB
+        #transforms.Normalize(mean=[0.0791], std=[0.0808])#MSRS
+        #transforms.Normalize(mean=[0.3269], std=[0.1993])#M3FD
+        #transforms.Normalize(mean=[0.512], std=[0.212])#DVen         
+        #transforms.Normalize(mean=[0.495], std=[0.19])#RGBT
         #transforms.Normalize(mean=[0.253], std=[0.191]) #LLVIP
     ])
     
@@ -421,7 +425,11 @@ def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device
     transform_v = transforms.Compose([
         transforms.Resize((240,240)),  # 调整图像大小
         transforms.ToTensor(),          # 转换为张量 [0,1]
-        transforms.Normalize(mean=[0.349, 0.335, 0.353], std=[0.219, 0.205, 0.218])#RGBT
+        transforms.Normalize(mean=[0.4438, 0.4408, 0.4311], std=[0.1572, 0.1527, 0.1575])#FMB 
+        #transforms.Normalize(mean=[0.1333, 0.1630, 0.1226], std=[0.1805, 0.1836, 0.1758])#MSRS 
+        #transforms.Normalize(mean=[0.5016, 0.5070, 0.4927], std=[0.1952, 0.1996, 0.2122])#M3FD 
+        #transforms.Normalize(mean=[0.3321, 0.3293, 0.3238], std=[0.2516, 0.2461, 0.2423])#DVen    
+        #transforms.Normalize(mean=[0.349, 0.335, 0.353], std=[0.219, 0.205, 0.218])#RGBT
         #transforms.Normalize(mean=[0.188, 0.186, 0.154], std=[0.183, 0.190, 0.197]) #LLVIP
     ])
     
@@ -534,9 +542,9 @@ def main(i_data_dir, v_data_dir, project_name, batch_size, num_epochs=10, device
 
 if __name__ == "__main__":
     config_dic = {
-        "i_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/DroneRGBT/infrared",
-        "v_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/DroneRGBT/visible",
-        "project_name": "Train_IVfusion_DroneRGBT",
+        "i_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/FMB/infrared",
+        "v_data_dir": "/data/1024whs_data/DeMMI-RF/Train_fusion/FMB/visible",
+        "project_name": "Train_IVfusion_FMB",
         "batch_size": 2,  # 减小批次大小从2到1
         "num_epochs": 5,
         "device_1": "cuda:0", 

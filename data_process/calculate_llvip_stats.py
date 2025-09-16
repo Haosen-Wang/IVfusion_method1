@@ -151,7 +151,7 @@ def print_stats(stats):
 def main():
     parser = argparse.ArgumentParser(description='计算数据集的均值和标准差')
     parser.add_argument('--data_root', type=str, 
-                        default='/data/1024whs_data/DeMMI-RF/Train_fusion/DroneVehicle',
+                        default='/data/1024whs_data/DeMMI-RF/Train_fusion/FMB',
                         help='数据集根目录')
     parser.add_argument('--modality', type=str, choices=['infrared', 'visible', 'both'], 
                         default='both', help='计算哪种模态的统计信息')

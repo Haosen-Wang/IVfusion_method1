@@ -182,8 +182,6 @@ class FusionLoss(nn.Module):
                 if torch.isinf(inp).any():
                     print(f"⚠️ {name} 图像包含Inf值")
                     return self._safe_loss_dict(fused.device)
-                if inp.max() > 10 or inp.min() < -10:
-                    print(f"⚠️ {name} 图像值范围异常: [{inp.min():.3f}, {inp.max():.3f}]")
                     # 限制到合理范围
             
             fused, visible, infrared = inputs
