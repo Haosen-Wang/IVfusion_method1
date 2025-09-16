@@ -7,10 +7,10 @@ data:
   mode: "RGB"
 
 training:
-  project_name: "Train_DIV_LLVIP_visible_blur"
+  project_name: "Train_DIV_LLVIP_visible"
   task: "dv_i"
   batch_size: 3  # 小批次避免内存问题
-  num_epochs: 5  # 快速测试
+  num_epochs: 10  # 快速测试
   resume_from_checkpoint: true
 
 device:

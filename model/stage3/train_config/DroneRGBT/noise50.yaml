@@ -3,21 +3,20 @@ data:
   v_data_dir: "/data/1024whs_data/DeMMI-RF/Train/visible/noise50/DroneRGBT"
   i_data_dir: "/data/1024whs_data/DeMMI-RF/Train/infrared/noise50/DroneRGBT"
   checkpoint_d: "/data/1024whs_checkpoint/Degradclean/Train_Degradclean_DroneRGBT_visible/latest_checkpoint.pth"
-  checkpoint_iv: ""
-  #"/data/1024whs_checkpoint/iv_fusion/Train_IVfusion_DroneRGBT/latest_checkpoint.pth"
+  checkpoint_iv: "/data/1024whs_checkpoint/iv_fusion/Train_IVfusion_DroneRGBT/latest_checkpoint.pth"
   mode: "RGB"
 
 training:
-  project_name: "Train_DIV_DroneRGBT_visible_noise50"
+  project_name: "Train_DIV_DroneRGBT_visible"
   task: "dv_i"
-  batch_size: 2  # 小批次避免内存问题
-  num_epochs: 5  # 快速测试
+  batch_size: 3  # 小批次避免内存问题
+  num_epochs: 10  # 快速测试
   resume_from_checkpoint: true
 
 device:
   device_1: "cuda:0"
-  device_2: "cuda:1"
-  device_3: "cuda:2"
+  device_2: "cuda:0"
+  device_3: "cuda:0"
 model:
   i_block_num: 2
   v_block_num: 2

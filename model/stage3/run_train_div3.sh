@@ -9,7 +9,7 @@
 # 设置默认参数
 DEFAULT_CONFIG=""
 DEFAULT_EXPERIMENT=""
-DEFAULT_GPUS="2"
+DEFAULT_GPUS="3"
 
 # 初始化参数
 CONFIG_FILE=$DEFAULT_CONFIG
@@ -112,10 +112,10 @@ if [ "$USE_CONFIG" = "true" ]; then
     export CUDA_VISIBLE_DEVICES="$GPUS"
     
     # 执行训练命令
-    echo "🔥 执行命令: CUDA_VISIBLE_DEVICES=$GPUS python train_div2.py $PYTHON_ARGS"
+    echo "🔥 执行命令: CUDA_VISIBLE_DEVICES=$GPUS python train_div3.py $PYTHON_ARGS"
     echo "================================="
 
-    eval "python train_div2.py $PYTHON_ARGS"
+    eval "python train_div3.py $PYTHON_ARGS"
 
     # 检查执行结果
     if [ $? -eq 0 ]; then

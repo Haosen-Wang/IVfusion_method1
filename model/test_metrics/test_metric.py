@@ -356,6 +356,140 @@ class FusionMetrics:
         
         return numerator / (denominator + 1e-10)
     
+    def mutual_information(self, fused: np.ndarray, img_a: np.ndarray, 
+                          img_b: np.ndarray, bins: int = 256) -> float:
+        """
+        计算互信息 (Mutual Information)
+        衡量融合图像与源图像之间的信息依赖程度
+        
+        Args:
+            fused: 融合图像
+            img_a: 源图像A (可见光)
+            img_b: 源图像B (红外)
+            bins: 直方图分箱数
+            
+        Returns:
+            MI值，值越大表示融合图像保留了更多源图像信息
+        """
+        fused = self._check_image_format(fused)
+        img_a = self._check_image_format(img_a)
+        img_b = self._check_image_format(img_b)
+        
+        # 量化图像到指定灰度级
+        fused_q = (fused * (bins - 1)).astype(np.uint8)
+        img_a_q = (img_a * (bins - 1)).astype(np.uint8)
+        img_b_q = (img_b * (bins - 1)).astype(np.uint8)
+        
+        # 计算MI(F,A) - 融合图像与源图像A的互信息
+        mi_fa = self._calculate_mi_between_images(fused_q, img_a_q, bins)
+        
+        # 计算MI(F,B) - 融合图像与源图像B的互信息  
+        mi_fb = self._calculate_mi_between_images(fused_q, img_b_q, bins)
+        
+        # 返回总互信息（融合图像与两个源图像的互信息之和）
+        return mi_fa + mi_fb
+    
+    def _calculate_mi_between_images(self, img1: np.ndarray, img2: np.ndarray, 
+                                   bins: int = 256) -> float:
+        """
+        计算两幅图像之间的互信息
+        
+        Args:
+            img1: 图像1 (已量化)
+            img2: 图像2 (已量化)
+            bins: 灰度级数
+            
+        Returns:
+            两幅图像间的互信息值
+        """
+        # 计算联合直方图
+        joint_hist, _, _ = np.histogram2d(
+            img1.flatten(), img2.flatten(), 
+            bins=bins, range=[[0, bins-1], [0, bins-1]]
+        )
+        
+        # 计算边缘直方图
+        hist1, _ = np.histogram(img1.flatten(), bins=bins, range=[0, bins-1])
+        hist2, _ = np.histogram(img2.flatten(), bins=bins, range=[0, bins-1])
+        
+        # 归一化为概率分布
+        joint_prob = joint_hist / np.sum(joint_hist)
+        prob1 = hist1 / np.sum(hist1)
+        prob2 = hist2 / np.sum(hist2)
+        
+        # 计算互信息 MI(X,Y) = Σ p(x,y) * log(p(x,y) / (p(x)*p(y)))
+        mi = 0.0
+        for i in range(bins):
+            for j in range(bins):
+                if joint_prob[i, j] > 0 and prob1[i] > 0 and prob2[j] > 0:
+                    mi += joint_prob[i, j] * np.log2(
+                        joint_prob[i, j] / (prob1[i] * prob2[j])
+                    )
+        
+        return mi
+    
+    def normalized_mutual_information(self, fused: np.ndarray, img_a: np.ndarray,
+                                    img_b: np.ndarray, bins: int = 256) -> float:
+        """
+        计算归一化互信息 (Normalized Mutual Information, NMI)
+        NMI将互信息归一化到[0,1]范围，便于比较
+        
+        Args:
+            fused: 融合图像
+            img_a: 源图像A
+            img_b: 源图像B  
+            bins: 直方图分箱数
+            
+        Returns:
+            NMI值，范围[0,1]，值越大越好
+        """
+        fused = self._check_image_format(fused)
+        img_a = self._check_image_format(img_a)
+        img_b = self._check_image_format(img_b)
+        
+        # 量化图像
+        fused_q = (fused * (bins - 1)).astype(np.uint8)
+        img_a_q = (img_a * (bins - 1)).astype(np.uint8)
+        img_b_q = (img_b * (bins - 1)).astype(np.uint8)
+        
+        # 计算互信息
+        mi_fa = self._calculate_mi_between_images(fused_q, img_a_q, bins)
+        mi_fb = self._calculate_mi_between_images(fused_q, img_b_q, bins)
+        
+        # 计算熵用于归一化
+        h_f = self._calculate_entropy_from_image(fused_q, bins)
+        h_a = self._calculate_entropy_from_image(img_a_q, bins)
+        h_b = self._calculate_entropy_from_image(img_b_q, bins)
+        
+        # 归一化互信息 NMI = 2*MI(X,Y) / (H(X) + H(Y))
+        nmi_fa = 2 * mi_fa / (h_f + h_a + 1e-10)
+        nmi_fb = 2 * mi_fb / (h_f + h_b + 1e-10)
+        
+        # 返回平均归一化互信息
+        return (nmi_fa + nmi_fb) / 2
+    
+    def _calculate_entropy_from_image(self, img: np.ndarray, bins: int = 256) -> float:
+        """
+        计算图像的信息熵
+        
+        Args:
+            img: 输入图像 (已量化)
+            bins: 灰度级数
+            
+        Returns:
+            信息熵值
+        """
+        hist, _ = np.histogram(img.flatten(), bins=bins, range=[0, bins-1])
+        prob = hist / np.sum(hist)
+        
+        # 计算熵 H(X) = -Σ p(x) * log(p(x))
+        entropy = 0.0
+        for p in prob:
+            if p > 0:
+                entropy -= p * np.log2(p)
+        
+        return entropy
+    
     def calculate_all_metrics(self, fused: Union[torch.Tensor, np.ndarray], 
                             img_a: Union[torch.Tensor, np.ndarray], 
                             img_b: Union[torch.Tensor, np.ndarray], 
@@ -379,6 +513,10 @@ class FusionMetrics:
         metrics['SF'] = self.sf(fused)
         metrics['SD'] = self.sd(fused)
         metrics['NABF'] = self.nabf(fused, img_a, img_b)
+        
+        # 互信息指标
+        metrics['MI'] = self.mutual_information(fused, img_a, img_b)
+        metrics['NMI'] = self.normalized_mutual_information(fused, img_a, img_b)
         
         # 有参考指标 (如果提供了参考图像)
         if reference is not None:
