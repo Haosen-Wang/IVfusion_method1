@@ -1,0 +1,84 @@
+{
+  "config": {
+    "data": {
+      "i_dir": "/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/LLVIP/infrared",
+      "v_dir": "/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/LLVIP/visible",
+      "d_dir": "/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/LLVIP/input"
+    },
+    "model": {
+      "checkpoint": "/data/1024whs_checkpoint/CIV/Train_DIV_LLVIP_visible/latest_checkpoint.pth",
+      "task": "dv_i"
+    },
+    "test": {
+      "batch_size": 5,
+      "num_workers": 2,
+      "pin_memory": false,
+      "test_times": 1,
+      "device": "cuda:0"
+    },
+    "evaluation": {
+      "metrics": [
+        "EN",
+        "SF",
+        "SD",
+        "NABF",
+        "MSE",
+        "PSNR",
+        "MS-SSIM",
+        "CC",
+        "VIF",
+        "MI",
+        "NMI"
+      ]
+    },
+    "output": {
+      "save_results": true,
+      "results_dir": "./test_results/LLVIP",
+      "log_level": "INFO"
+    },
+    "experiment": {
+      "name": "LLVIP_Test",
+      "description": "LLVIP dataset fusion test with DIV model",
+      "version": "1.0"
+    }
+  },
+  "test_results": [
+    {
+      "EN": 5.574178444116602,
+      "EN_std": 2.4707535588286738,
+      "EN_std_std": 1.1267690362460343,
+      "SF": 0.04930164843816174,
+      "SF_std": 0.024441768016212603,
+      "SF_std_std": 0.00594079233831662,
+      "SD": 0.10239046470104542,
+      "SD_std": 0.049267272771811116,
+      "SD_std_std": 0.014333727667728157,
+      "NABF": 0.4964913818373866,
+      "NABF_std": 0.22528159568545558,
+      "NABF_std_std": 0.10237971078157175,
+      "MI": 1.517283089147824,
+      "MI_std": 0.7105311753160101,
+      "MI_std_std": 0.22783862333386576,
+      "NMI": 0.10838230723710678,
+      "NMI_std": 0.05033211015489808,
+      "NMI_std_std": 0.01750741248563032,
+      "MSE": 0.039313122385950326,
+      "MSE_std": 0.05995359324935586,
+      "MSE_std_std": 0.02939884274451288,
+      "PSNR": 20.09056576394137,
+      "PSNR_std": 5.623514319792888,
+      "PSNR_std_std": 2.2446455113713766,
+      "MS-SSIM": 0.6828854118005321,
+      "MS-SSIM_std": 0.3015099114278028,
+      "MS-SSIM_std_std": 0.1330224046908347,
+      "CC": 0.9420299430336003,
+      "CC_std": 0.016093768580003807,
+      "CC_std_std": 0.0038496503326881757,
+      "VIF": 0.1560367578672637,
+      "VIF_std": 0.22148546301053015,
+      "VIF_std_std": 0.11019115796326552
+    }
+  ],
+  "overall_stats": null,
+  "timestamp": "20250916_204247"
+}

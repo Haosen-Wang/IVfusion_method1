@@ -81,7 +81,34 @@ class FusionMetrics:
             
         # 归一化到[0,1]范围
         if image.max() > 1.0:
-            image = image / 255.0
+            image = image
+            #image = image / 255.0
+            
+        return image
+    @staticmethod
+    def _check_image_format_qabf(image: Union[torch.Tensor, np.ndarray]) -> np.ndarray:
+        """
+        检查并标准化图像格式
+        支持PyTorch Tensor和numpy数组输入
+        """
+        # 首先转换为numpy数组
+        image = FusionMetrics._convert_tensor_to_numpy(image)
+        
+        if len(image.shape) == 3:
+            # 如果是彩色图像，转为灰度
+            if image.shape[2] == 3:
+                image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            elif image.shape[2] == 1:
+                image = image.squeeze()
+        
+        # 确保数据类型为float
+        if image.dtype != np.float64:
+            image = image.astype(np.float64)
+            
+        # 归一化到[0,1]范围
+        if image.max() > 1.0:
+            image = image
+            #image = image / 255.0
             
         return image
     
@@ -97,8 +124,8 @@ class FusionMetrics:
         Returns:
             MSE值
         """
-        fused = self._check_image_format(fused)
-        reference = self._check_image_format(reference)
+        fused = self._check_image_format_qabf(fused)
+        reference = self._check_image_format_qabf(reference)
         
         return np.mean((fused - reference) ** 2)
     
@@ -135,9 +162,9 @@ class FusionMetrics:
         Returns:
             NABF值
         """
-        fused = self._check_image_format(fused)
-        img_a = self._check_image_format(img_a)
-        img_b = self._check_image_format(img_b)
+        fused = self._check_image_format_qabf(fused)
+        img_a = self._check_image_format_qabf(img_a)
+        img_b = self._check_image_format_qabf(img_b)
         
         # 计算梯度
         sobel_x = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
@@ -490,6 +517,201 @@ class FusionMetrics:
         
         return entropy
     
+    def average_gradient(self, image: Union[torch.Tensor, np.ndarray]) -> float:
+        """
+        计算平均梯度 (Average Gradient, AG)
+        衡量图像的清晰度和细节保持能力
+        
+        Args:
+            image: 输入图像
+            
+        Returns:
+            AG值，值越大表示图像越清晰
+        """
+        image = self._check_image_format(image)
+        
+        # 计算水平和垂直梯度
+        grad_x = cv2.Sobel(image, cv2.CV_64F, 1, 0, ksize=3)
+        grad_y = cv2.Sobel(image, cv2.CV_64F, 0, 1, ksize=3)
+        
+        # 计算梯度幅度
+        gradient_magnitude = np.sqrt(grad_x**2 + grad_y**2)
+        
+        # 计算平均梯度
+        ag = np.mean(gradient_magnitude)
+        
+        return ag
+    
+    def sum_of_correlations_of_differences(self, fused: Union[torch.Tensor, np.ndarray],
+                                         img_a: Union[torch.Tensor, np.ndarray],
+                                         img_b: Union[torch.Tensor, np.ndarray]) -> float:
+        """
+        计算差异相关性总和 (Sum of Correlations of Differences, SCD)
+        衡量融合图像与源图像之间的相关性
+        
+        Args:
+            fused: 融合图像
+            img_a: 源图像A (可见光)
+            img_b: 源图像B (红外)
+            
+        Returns:
+            SCD值，值越大表示融合效果越好
+        """
+        fused = self._check_image_format(fused)
+        img_a = self._check_image_format(img_a)
+        img_b = self._check_image_format(img_b)
+        
+        # 计算差异图像
+        diff_fa = fused - img_a
+        diff_fb = fused - img_b
+        diff_ab = img_a - img_b
+        
+        # 计算相关系数
+        def correlation_coefficient(x, y):
+            x_flat = x.flatten()
+            y_flat = y.flatten()
+            
+            if np.std(x_flat) == 0 or np.std(y_flat) == 0:
+                return 0.0
+            
+            correlation = np.corrcoef(x_flat, y_flat)[0, 1]
+            return correlation if not np.isnan(correlation) else 0.0
+        
+        # 计算各相关性
+        corr_fa_ab = correlation_coefficient(diff_fa, diff_ab)
+        corr_fb_ab = correlation_coefficient(diff_fb, diff_ab)
+        
+        # SCD = r(F-A, A-B) + r(F-B, A-B)
+        scd = corr_fa_ab + corr_fb_ab
+        
+        return scd
+    
+    def qabf(self, fused: Union[torch.Tensor, np.ndarray],
+             img_a: Union[torch.Tensor, np.ndarray],
+             img_b: Union[torch.Tensor, np.ndarray]) -> float:
+        """
+        计算基于边缘的质量指标 (Edge-based similarity measure, Qabf)
+        基于边缘信息评估融合图像质量
+        
+        Args:
+            fused: 融合图像
+            img_a: 源图像A (可见光)
+            img_b: 源图像B (红外)
+            
+        Returns:
+            Qabf值，范围[0,1]，值越大表示融合效果越好
+        """
+        fused = self._check_image_format_qabf(fused)
+        img_a = self._check_image_format_qabf(img_a)
+        img_b = self._check_image_format_qabf(img_b)
+        
+        # Sobel边缘检测
+        def sobel_edges(img):
+            grad_x = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=3)
+            grad_y = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=3)
+            return np.sqrt(grad_x**2 + grad_y**2)
+        
+        # 计算边缘强度
+        edges_f = sobel_edges(fused)
+        edges_a = sobel_edges(img_a)
+        edges_b = sobel_edges(img_b)
+        
+        # 计算边缘方向
+        def edge_direction(img):
+            grad_x = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=3)
+            grad_y = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=3)
+            return np.arctan2(grad_y, grad_x + 1e-10)
+        
+        dir_f = edge_direction(fused)
+        dir_a = edge_direction(img_a)
+        dir_b = edge_direction(img_b)
+        
+        # 计算边缘保持系数
+        def edge_preservation(ef, ea, eb, df, da, db):
+            h, w = ef.shape
+            qabf_sum = 0.0
+            count = 0
+            
+            for i in range(h):
+                for j in range(w):
+                    # 边缘强度权重
+                    wa = ea[i, j] / (ea[i, j] + eb[i, j] + 1e-10)
+                    wb = eb[i, j] / (ea[i, j] + eb[i, j] + 1e-10)
+                    
+                    # 计算边缘保持值
+                    if ea[i, j] > 0 or eb[i, j] > 0:
+                        # 边缘强度相似性
+                        strength_sim = (4 * ef[i, j] * (wa * ea[i, j] + wb * eb[i, j])) / \
+                                     ((ef[i, j])**2 + (wa * ea[i, j] + wb * eb[i, j])**2 + 1e-10)
+                        
+                        # 边缘方向相似性
+                        dir_diff_a = abs(df[i, j] - da[i, j])
+                        dir_diff_b = abs(df[i, j] - db[i, j])
+                        dir_sim = wa * np.cos(dir_diff_a) + wb * np.cos(dir_diff_b)
+                        
+                        qabf_sum += strength_sim * dir_sim
+                        count += 1
+            
+            return qabf_sum / (count + 1e-10)
+        
+        qabf_value = edge_preservation(edges_f, edges_a, edges_b, dir_f, dir_a, dir_b)
+        
+        # 确保结果在[0,1]范围内
+        return np.clip(qabf_value, 0.0, 1.0)
+    
+    def quality_gradient(self, fused: Union[torch.Tensor, np.ndarray],
+                        img_a: Union[torch.Tensor, np.ndarray],
+                        img_b: Union[torch.Tensor, np.ndarray]) -> float:
+        """
+        计算质量梯度(QG)指标
+        
+        QG指标评估融合图像相对于源图像的梯度质量保持能力
+        通过比较融合图像与源图像的梯度强度来衡量边缘信息的保持程度
+        
+        Args:
+            fused: 融合图像
+            img_a: 源图像A (可见光)
+            img_b: 源图像B (红外)
+            
+        Returns:
+            QG值，数值越大表示质量越好
+        """
+        # 转换为numpy数组
+        fused = self._convert_tensor_to_numpy(fused)
+        img_a = self._convert_tensor_to_numpy(img_a)
+        img_b = self._convert_tensor_to_numpy(img_b)
+        
+        # 确保数据类型为float
+        fused = fused.astype(np.float64)
+        img_a = img_a.astype(np.float64)
+        img_b = img_b.astype(np.float64)
+        
+        # 计算Sobel梯度
+        def calculate_sobel_gradient(img):
+            sobel_x = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=3)
+            sobel_y = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=3)
+            gradient_magnitude = np.sqrt(sobel_x**2 + sobel_y**2)
+            return gradient_magnitude
+        
+        # 计算各图像的梯度
+        grad_f = calculate_sobel_gradient(fused)
+        grad_a = calculate_sobel_gradient(img_a)
+        grad_b = calculate_sobel_gradient(img_b)
+        
+        # 计算源图像的最大梯度作为参考
+        grad_ref = np.maximum(grad_a, grad_b)
+        
+        # 计算QG指标
+        # QG = mean(Gf * Gref) / (mean(Gref^2) + epsilon)
+        # 其中Gf是融合图像梯度，Gref是参考梯度
+        
+        numerator = np.mean(grad_f * grad_ref)
+        denominator = np.mean(grad_ref**2) + 1e-10
+        
+        qg = numerator / denominator
+        
+        return float(qg)
+    
     def calculate_all_metrics(self, fused: Union[torch.Tensor, np.ndarray], 
                             img_a: Union[torch.Tensor, np.ndarray], 
                             img_b: Union[torch.Tensor, np.ndarray], 
@@ -517,6 +739,12 @@ class FusionMetrics:
         # 互信息指标
         metrics['MI'] = self.mutual_information(fused, img_a, img_b)
         metrics['NMI'] = self.normalized_mutual_information(fused, img_a, img_b)
+        
+        # 新增指标
+        metrics['AG'] = self.average_gradient(fused)
+        metrics['SCD'] = self.sum_of_correlations_of_differences(fused, img_a, img_b)
+        metrics['Qabf'] = self.qabf(fused, img_a, img_b)
+        metrics['QG'] = self.quality_gradient(fused, img_a, img_b)
         
         # 有参考指标 (如果提供了参考图像)
         if reference is not None:

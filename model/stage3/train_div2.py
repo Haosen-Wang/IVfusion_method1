@@ -532,14 +532,16 @@ def main(d_data_dir, i_data_dir,v_data_dir, project_name
     transform_i = transforms.Compose([
             transforms.Resize((240,240)),  # 调整图像大小
             transforms.ToTensor(),# 转换为张量 [0,1]
-            transforms.Normalize(mean=[0.253], std=[0.191]) #LLVIP
+            transforms.Normalize(mean=[0.3011], std=[0.1835])#FMB
+            #transforms.Normalize(mean=[0.253], std=[0.191]) #LLVIP
             #transforms.Normalize(mean=[0.495], std=[0.19])#RGBT
             #transforms.Normalize(mean=[0.512], std=[0.212])#DVen  # 单通道标准化
         ])
     transform_v = transforms.Compose([
             transforms.Resize((240,240)),  # 调整图像大小
             transforms.ToTensor(),
-            transforms.Normalize(mean=[0.188, 0.186, 0.154], std=[0.183, 0.190, 0.197]) #LLVIP
+            transforms.Normalize(mean=[0.4438, 0.4408, 0.4311], std=[0.1572, 0.1527, 0.1575])#FMB
+            #transforms.Normalize(mean=[0.188, 0.186, 0.154], std=[0.183, 0.190, 0.197]) #LLVIP
             #transforms.Normalize(mean=[0.349, 0.335, 0.353], std=[0.219, 0.205, 0.218])#RGBT
             #transforms.Normalize(mean=[0.3321, 0.3293, 0.3238], std=[0.2516, 0.2461, 0.2423])#DVen          # 转换为张量 [0,1]
             #transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])  # RGB标准化

@@ -1,0 +1,100 @@
+{
+  "config": {
+    "data": {
+      "i_dir": "/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/LLVIP/infrared",
+      "v_dir": "/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/LLVIP/visible",
+      "d_dir": "/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/LLVIP/input"
+    },
+    "model": {
+      "checkpoint": "/data/1024whs_checkpoint/CIV/Train_DIV_LLVIP_visible/latest_checkpoint.pth",
+      "task": "dv_i"
+    },
+    "test": {
+      "batch_size": 5,
+      "num_workers": 2,
+      "pin_memory": false,
+      "test_times": 1,
+      "device": "cuda:0"
+    },
+    "evaluation": {
+      "metrics": [
+        "EN",
+        "SF",
+        "SD",
+        "NABF",
+        "MSE",
+        "PSNR",
+        "MS-SSIM",
+        "CC",
+        "VIF",
+        "MI",
+        "NMI",
+        "AG",
+        "SCD",
+        "Qabf",
+        "QG"
+      ]
+    },
+    "output": {
+      "save_results": true,
+      "results_dir": "./test_results/LLVIP",
+      "log_level": "INFO"
+    },
+    "experiment": {
+      "name": "LLVIP_Test",
+      "description": "LLVIP dataset fusion test with DIV model",
+      "version": "1.0"
+    }
+  },
+  "test_results": [
+    {
+      "EN": 7.0344779573563345,
+      "EN_std": 0.18158174343938552,
+      "EN_std_std": 0.04175216206736888,
+      "SF": 0.06607647386071104,
+      "SF_std": 0.012433387879958652,
+      "SF_std_std": 0.0019871891891453455,
+      "SD": 0.13511363153298506,
+      "SD_std": 0.019198742995791555,
+      "SD_std_std": 0.003063679106117882,
+      "NABF": 0.42426925432961765,
+      "NABF_std": 0.04955675428109654,
+      "NABF_std_std": 0.008160075570895625,
+      "MI": 2.271701009286717,
+      "MI_std": 0.295649729418197,
+      "MI_std_std": 0.031047503879204377,
+      "NMI": 0.15941860431352226,
+      "NMI_std": 0.015509100713184258,
+      "NMI_std_std": 0.0019385186649969236,
+      "AG": 0.24785810289970087,
+      "AG_std": 0.043251036978379155,
+      "AG_std_std": 0.0075757904919571805,
+      "SCD": -0.13777051008862917,
+      "SCD_std": 0.027876828688274912,
+      "SCD_std_std": 0.0088457441807807,
+      "Qabf": 0.9360897546866987,
+      "Qabf_std": 0.0694286276257224,
+      "Qabf_std_std": 0.03802182234481045,
+      "QG": 0.6054330383435088,
+      "QG_std": 0.06725218033175943,
+      "QG_std_std": 0.011478276606840006,
+      "MSE": 0.009384746230275675,
+      "MSE_std": 0.001486731633009561,
+      "MSE_std_std": 0.000382204480548575,
+      "PSNR": 20.346868684743626,
+      "PSNR_std": 0.7259951734241898,
+      "PSNR_std_std": 0.2042027127420543,
+      "MS-SSIM": 0.7878100997677385,
+      "MS-SSIM_std": 0.03448053583324754,
+      "MS-SSIM_std_std": 0.004938345578824256,
+      "CC": 0.9125429356203285,
+      "CC_std": 0.022115953327819942,
+      "CC_std_std": 0.007767388836000389,
+      "VIF": 0.028890438709099717,
+      "VIF_std": 0.0036796447740473598,
+      "VIF_std_std": 0.00019018538361048487
+    }
+  ],
+  "overall_stats": null,
+  "timestamp": "20250917_140003"
+}
