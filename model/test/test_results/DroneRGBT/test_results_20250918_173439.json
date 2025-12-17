@@ -1,0 +1,100 @@
+{
+  "config": {
+    "data": {
+      "i_dir": "/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/DroneRGBT/infrared",
+      "v_dir": "/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/DroneRGBT/visible",
+      "d_dir": "/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/DroneRGBT/input"
+    },
+    "model": {
+      "checkpoint": "/data/1024whs_checkpoint/CIV/Train_DIV_DroneRGBT_visible/latest_checkpoint.pth",
+      "task": "dv_i"
+    },
+    "test": {
+      "batch_size": 5,
+      "num_workers": 2,
+      "pin_memory": false,
+      "test_times": 1,
+      "device": "cuda:0"
+    },
+    "evaluation": {
+      "metrics": [
+        "EN",
+        "SF",
+        "SD",
+        "NABF",
+        "MSE",
+        "PSNR",
+        "MS-SSIM",
+        "CC",
+        "VIF",
+        "MI",
+        "NMI",
+        "AG",
+        "SCD",
+        "Qabf",
+        "QG"
+      ]
+    },
+    "output": {
+      "save_results": true,
+      "results_dir": "./test_results/DroneRGBT",
+      "log_level": "INFO"
+    },
+    "experiment": {
+      "name": "DroneRGBT_Test",
+      "description": "DroneRGBT dataset fusion test with DIV model",
+      "version": "1.0"
+    }
+  },
+  "test_results": [
+    {
+      "EN": 6.6110813923914105,
+      "EN_std": 0.3082092610346904,
+      "EN_std_std": 0.1301133718932371,
+      "SF": 0.0865424246220014,
+      "SF_std": 0.015324061950772195,
+      "SF_std_std": 0.006620167699838736,
+      "SD": 0.10828026651943033,
+      "SD_std": 0.025046805203468026,
+      "SD_std_std": 0.011044454492976589,
+      "NABF": 0.39554623586586996,
+      "NABF_std": 0.09994146383398225,
+      "NABF_std_std": 0.026149378639452405,
+      "MI": 1.9857360049029684,
+      "MI_std": 0.44717801438193017,
+      "MI_std_std": 0.1920726196117739,
+      "NMI": 0.14808226412436853,
+      "NMI_std": 0.02791269105825763,
+      "NMI_std_std": 0.012057774654620886,
+      "AG": 0.2149309518988791,
+      "AG_std": 0.05729462433671239,
+      "AG_std_std": 0.02729537836001363,
+      "SCD": -0.2687755625109377,
+      "SCD_std": 0.10594324680927497,
+      "SCD_std_std": 0.05453258510840477,
+      "Qabf": 0.7429630765984286,
+      "Qabf_std": 0.16797479480634797,
+      "Qabf_std_std": 0.03171711942486565,
+      "QG": 0.7961760761399437,
+      "QG_std": 0.07913277108253025,
+      "QG_std_std": 0.02109415768845694,
+      "MSE": 0.008875904328135788,
+      "MSE_std": 0.005473069104904268,
+      "MSE_std_std": 0.0014702361532697072,
+      "PSNR": 21.67139066123728,
+      "PSNR_std": 3.07048429897953,
+      "PSNR_std_std": 0.5988645538696471,
+      "MS-SSIM": 0.8077295169444425,
+      "MS-SSIM_std": 0.043706203083468766,
+      "MS-SSIM_std_std": 0.015861654172219505,
+      "CC": 0.8299080197890393,
+      "CC_std": 0.07027675260764611,
+      "CC_std_std": 0.020466836858726963,
+      "VIF": 0.01278179549567967,
+      "VIF_std": 0.0024509054281803737,
+      "VIF_std_std": 0.0006721348041248823
+    }
+  ],
+  "overall_stats": null,
+  "timestamp": "20250918_173439"
+}

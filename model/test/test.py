@@ -170,7 +170,9 @@ def check_data(i_dataset, v_dataset, d_dataset):
     print(f"最终配对数量: 红外图像{len(i_dataset)}, 可见光图像{len(v_dataset)}, 退化图像{len(d_dataset)}")
 def test_model(model, dataloader, device, task="dv_i", config=None):
     Evaluator = TensorFusionEvaluator()
-    all_metrics = {}
+    all_fusion_metrics = {}  # 融合图像的指标
+    all_clean_metrics = {}   # 干净图像的指标
+    
     with torch.no_grad():
         for i_batch, (i_data, v_data, d_data) in enumerate(tqdm(dataloader, desc="Testing")):
             # 将数据移到设备上
@@ -180,28 +182,50 @@ def test_model(model, dataloader, device, task="dv_i", config=None):
             
             if task == 'dv_i':
                 out, clean = model(i_data, d_data, device, device, device)
-                batch_metrics = Evaluator.evaluate_fusion_batch(out, v_data, i_data)
+                # 计算融合图像的指标 (out vs v_data and i_data)
+                fusion_batch_metrics = Evaluator.evaluate_fusion_batch(out, v_data, i_data)
+                # 计算干净图像与退化图像之间的指标 (clean vs d_data and i_data)
+                clean_batch_metrics = Evaluator.evaluate_fusion_batch(clean, d_data, i_data)
+                
             elif task == 'di_v':
-                out, clean = model(d_data, v_data)
-                batch_metrics = Evaluator.evaluate_fusion_batch(out, v_data, i_data)
+                out, clean = model(d_data, v_data, device, device, device)
+                # 计算融合图像的指标 (out vs v_data and i_data)
+                fusion_batch_metrics = Evaluator.evaluate_fusion_batch(out, v_data, i_data)
+                # 计算干净图像与退化图像之间的指标 (clean vs d_data and v_data)
+                clean_batch_metrics = Evaluator.evaluate_fusion_batch(clean, d_data, v_data)
             
             # 根据配置过滤指标
             if config:
-                batch_metrics = filter_metrics_by_config(batch_metrics, config)
+                fusion_batch_metrics = filter_metrics_by_config(fusion_batch_metrics, config)
+                clean_batch_metrics = filter_metrics_by_config(clean_batch_metrics, config)
                 
-            for metric_name, value in batch_metrics.items():
-                if metric_name not in all_metrics:
-                    all_metrics[metric_name] = []
-                all_metrics[metric_name].append(value)
+            # 收集融合图像指标
+            for metric_name, value in fusion_batch_metrics.items():
+                if metric_name not in all_fusion_metrics:
+                    all_fusion_metrics[metric_name] = []
+                all_fusion_metrics[metric_name].append(value)
+            
+            # 收集干净图像指标
+            for metric_name, value in clean_batch_metrics.items():
+                if metric_name not in all_clean_metrics:
+                    all_clean_metrics[metric_name] = []
+                all_clean_metrics[metric_name].append(value)
     
-    # 计算每个指标的平均值和标准差
-    averaged_metrics = {}
-    for metric_name, values in all_metrics.items():
+    # 计算融合图像指标的平均值和标准差
+    averaged_fusion_metrics = {}
+    for metric_name, values in all_fusion_metrics.items():
         values_tensor = torch.tensor(values)
-        averaged_metrics[metric_name] = values_tensor.mean().item()
-        averaged_metrics[f"{metric_name}_std"] = values_tensor.std().item()
+        averaged_fusion_metrics[metric_name] = values_tensor.mean().item()
+        averaged_fusion_metrics[f"{metric_name}_std"] = values_tensor.std().item()
     
-    return averaged_metrics
+    # 计算干净图像指标的平均值和标准差
+    averaged_clean_metrics = {}
+    for metric_name, values in all_clean_metrics.items():
+        values_tensor = torch.tensor(values)
+        averaged_clean_metrics[metric_name] = values_tensor.mean().item()
+        averaged_clean_metrics[f"{metric_name}_std"] = values_tensor.std().item()
+    
+    return averaged_fusion_metrics, averaged_clean_metrics
 def load_datasets(config):
     """根据配置加载数据集"""
     # 从配置获取路径
@@ -230,13 +254,20 @@ def load_datasets(config):
         transforms.ToTensor(),
         #transforms.Normalize(mean=[0.188, 0.186, 0.154], std=[0.183, 0.190, 0.197]) #LLVIP
     ])
-    
-    # 红外图像使用灰度模式 (L)
-    i_dataset = ImageDataset(i_dir, transform=transform_i, convert='L')
-    # 可见光图像使用RGB模式
-    v_dataset = ImageDataset(v_dir, transform=transform_v, convert='RGB')
+    if config['model']['task']=="dv_i":
+        # 红外图像使用灰度模式 (L)
+        i_dataset = ImageDataset(i_dir, transform=transform_i, convert='L')
+        # 可见光图像使用RGB模式
+        v_dataset = ImageDataset(v_dir, transform=transform_v, convert='RGB')
     # 退化图像使用RGB模式
-    d_dataset = ImageDataset(d_dir, transform=transform_d, convert='RGB')
+        d_dataset = ImageDataset(d_dir, transform=transform_d, convert='RGB')
+    elif config['model']['task']=="di_v":
+        # 红外图像使用灰度模式 (L)
+        i_dataset = ImageDataset(i_dir, transform=transform_i, convert='L')
+        # 可见光图像使用RGB模式
+        v_dataset = ImageDataset(v_dir, transform=transform_v, convert='RGB')
+        # 退化图像使用灰度模式 (L)
+        d_dataset = ImageDataset(d_dir, transform=transform_d, convert='L')
     
     check_data(i_dataset, v_dataset, d_dataset)
     paired_dataset = PairedDataset(i_dataset, v_dataset, d_dataset)
@@ -282,35 +313,62 @@ def main(config):
     
     # 进行测试
     test_times = config['test']['test_times']
-    all_test_results = []
+    all_fusion_results = []
+    all_clean_results = []
     
     for test_time in range(test_times):
         print(f"\n=== 第 {test_time + 1}/{test_times} 次测试 ===")
         with torch.no_grad():
-            averaged_metrics = test_model(model, data_loader, device, task=task, config=config)
+            averaged_fusion_metrics, averaged_clean_metrics = test_model(model, data_loader, device, task=task, config=config)
         
-        all_test_results.append(averaged_metrics)
+        all_fusion_results.append(averaged_fusion_metrics)
+        all_clean_results.append(averaged_clean_metrics)
         
-        print("本次测试结果:")
-        filtered_for_display = filter_metrics_by_config(averaged_metrics, config) if config else averaged_metrics
+        print("\n【融合图像指标】本次测试结果:")
+        filtered_fusion_display = filter_metrics_by_config(averaged_fusion_metrics, config) if config else averaged_fusion_metrics
         
-        for metric_name, value in filtered_for_display.items(): 
+        for metric_name, value in filtered_fusion_display.items(): 
             if not metric_name.endswith('_std'):
                 std_name = f"{metric_name}_std"
-                std_value = filtered_for_display.get(std_name, 0)
+                std_value = filtered_fusion_display.get(std_name, 0)
+                print(f"  {metric_name:15s}: {value:8.6f} ± {std_value:.6f}")
+        
+        print("\n【干净图像指标】本次测试结果:")
+        filtered_clean_display = filter_metrics_by_config(averaged_clean_metrics, config) if config else averaged_clean_metrics
+        
+        for metric_name, value in filtered_clean_display.items(): 
+            if not metric_name.endswith('_std'):
+                std_name = f"{metric_name}_std"
+                std_value = filtered_clean_display.get(std_name, 0)
                 print(f"  {metric_name:15s}: {value:8.6f} ± {std_value:.6f}")
     
     # 计算多次测试的总体统计
-    overall_stats = None
+    fusion_overall_stats = None
+    clean_overall_stats = None
+    
     if test_times > 1:
         print(f"\n=== {test_times}次测试总体统计 ===")
-        overall_stats = calculate_overall_stats(all_test_results)
-        for metric_name, stats in overall_stats.items():
+        
+        print("\n【融合图像指标】总体统计:")
+        fusion_overall_stats = calculate_overall_stats(all_fusion_results)
+        for metric_name, stats in fusion_overall_stats.items():
+            if not metric_name.endswith('_std'):
+                print(f"  {metric_name:15s}: {stats['mean']:8.6f} ± {stats['std']:.6f} (范围: {stats['min']:.6f} - {stats['max']:.6f})")
+        
+        print("\n【干净图像指标】总体统计:")
+        clean_overall_stats = calculate_overall_stats(all_clean_results)
+        for metric_name, stats in clean_overall_stats.items():
             if not metric_name.endswith('_std'):
                 print(f"  {metric_name:15s}: {stats['mean']:8.6f} ± {stats['std']:.6f} (范围: {stats['min']:.6f} - {stats['max']:.6f})")
     
     # 保存结果
-    save_results(config, all_test_results, overall_stats)
+    save_results(config, {
+        'fusion_results': all_fusion_results,
+        'clean_results': all_clean_results
+    }, {
+        'fusion_stats': fusion_overall_stats,
+        'clean_stats': clean_overall_stats
+    })
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Test LLVIP fusion model with YAML config')

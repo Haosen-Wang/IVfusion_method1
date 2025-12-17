@@ -52,12 +52,12 @@ class IV_fusion_model(nn.Module):
         v = v.to(device_2)
         l,_,_= self.I_encoder_decoder(i)
         g,_,_ = self.V_encoder_decoder(v)
-        Ic_i = i +0.1*l
+        Ic_i = i+0.1*l
         Ic_v = v +0.1*g
         Ic_i = Ic_i.to(device_3)
         Ic_v = Ic_v.to(device_3)
         self.fusion_net = self.fusion_net.to(device_3)
-        fused_input = 0.5*Ic_i+0.5*Ic_v
+        fused_input = 0.3*Ic_i+0.7*Ic_v
         fusion = self.fusion_net(fused_input)
         return fusion
 

@@ -1,0 +1,58 @@
+# LLVIP测试配置文件
+# Test configuration for LLVIP dataset
+
+# 数据路径配置
+data:
+  i_dir: "/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/MSRS/infrared"
+  #"/data/1024whs_data/DeMMI-RF/Test_div/LLVIP/infrared"
+  #"/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/LLVIP/infrared"  # 红外图像目录
+  v_dir: "/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/MSRS/visible"
+  #"/data/1024whs_data/DeMMI-RF/Test_div/LLVIP/visible"
+  #"/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/LLVIP/visible"   # 可见光图像目录
+  d_dir: "/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/MSRS/input" 
+  #"/data/1024whs_data/DeMMI-RF/Test_div/LLVIP/input"
+  #"/data/1024whs_data/DeMMI-RF/Test/Multi-Task/alltask/LLVIP/input"     # 退化图像目录
+
+# 模型配置
+model:
+  checkpoint: "/data/1024whs_checkpoint/CIV/Train_DIV_MSRS/latest_checkpoint.pth"  # 模型检查点路径
+  task: "dv_i"  # 任务类型: dv_i (degraded visible + infrared) 或 di_v (degraded infrared + visible)
+
+# 测试配置
+test:
+  batch_size: 5          # 批次大小
+  num_workers: 2         # 数据加载器工作进程数
+  pin_memory: false      # 是否使用固定内存
+  test_times: 1          # 测试重复次数
+  device: "cuda:0"         # 设备选择: "auto", "cuda:0", "cpu"
+
+# 评估配置
+evaluation:
+  metrics:
+    - "EN"        # 信息熵
+    - "SF"        # 空间频率
+    - "SD"        # 标准差
+    - "NABF"      # 噪声感知模糊因子
+    - "MSE"       # 均方误差
+    - "PSNR"      # 峰值信噪比
+    - "MS-SSIM"   # 多尺度结构相似性
+    - "CC"        # 相关系数
+    - "VIF"       # 视觉信息保真度
+    - "MI"        # 互信息
+    - "NMI"       # 归一化互信息
+    - "AG"       # 平均梯度
+    - "SCD"      # 差异的相关性总和
+    - "Qabf"     # 质量感知模糊因子
+    - "QG"       # 质量梯度
+
+# 输出配置
+output:
+  save_results: true           # 是否保存结果
+  results_dir: "./test_results/DroneRGBT"         # 结果保存目录
+  log_level: "INFO"                     # 日志级别: DEBUG, INFO, WARNING, ERROR
+  
+# 实验配置
+experiment:
+  name: "DroneRGBT_Test"                    # 实验名称
+  description: "DroneRGBT dataset fusion test with DIV model"  # 实验描述
+  version: "1.0"                        # 版本号
